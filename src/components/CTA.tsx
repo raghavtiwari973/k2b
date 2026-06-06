@@ -1,5 +1,5 @@
 import React from 'react';
-import { Mail, Phone, Send, X } from 'lucide-react';
+import { Mail, Phone, Send, X, Globe } from 'lucide-react';
 import { useCart } from './CartContext';
 
 export default function CTA() {
@@ -82,6 +82,15 @@ export default function CTA() {
                     <div>
                       <p className="font-dm text-xs text-orange-200 mb-0.5">Email Us</p>
                       <p className="font-manrope font-bold">key2brand360@gmail.com</p>
+                    </div>
+                  </a>
+                  <a href="https://key2brand.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-white group">
+                    <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center border border-white/20 group-hover:bg-white/20 transition-colors">
+                      <Globe className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <p className="font-dm text-xs text-orange-200 mb-0.5">Visit Website</p>
+                      <p className="font-manrope font-bold">key2brand.com</p>
                     </div>
                   </a>
                 </div>

@@ -33,7 +33,7 @@ export default function Hero() {
               <a href="#collections" className="inline-flex items-center justify-center gap-2 bg-slate-900 text-white px-8 py-4 rounded-full font-manrope font-bold text-base hover:bg-slate-800 transition-all shadow-xl shadow-slate-900/20 hover:-translate-y-1">
                 Explore Collections <ArrowRight className="w-4 h-4" />
               </a>
-              <a href="#contact" className="inline-flex items-center justify-center gap-2 bg-white text-slate-900 border-2 border-slate-200 px-8 py-4 rounded-full font-manrope font-bold text-base hover:border-slate-900 transition-all hover:-translate-y-1">
+              <a href="https://key2brand.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-white text-slate-900 border-2 border-slate-200 px-8 py-4 rounded-full font-manrope font-bold text-base hover:border-slate-900 transition-all hover:-translate-y-1">
                 Talk to an Expert
               </a>
             </div>

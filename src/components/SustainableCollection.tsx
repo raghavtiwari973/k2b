@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { Leaf, Droplets, Recycle, TreePine, X, ShoppingCart } from 'lucide-react';
-import { motion } from 'framer-motion';
 import { useCart } from './CartContext';
 
 const sustainableCards = [
@@ -113,13 +112,7 @@ export default function SustainableCollection() {
         <Leaf className="w-24 h-24 text-[#C89A3D]" strokeWidth={1} />
       </div>
 
-      <motion.div 
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
-        className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10 flex flex-col items-center"
-      >
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10 flex flex-col items-center animate-fade-in-up">
         {/* Section Header */}
         <div className="text-center mb-16 flex flex-col items-center">
           <h3 className="text-[#C89A3D] text-[20px] lg:text-[26px] font-medium mb-4 tracking-wide">
@@ -138,12 +131,7 @@ export default function SustainableCollection() {
           {sustainableCards.map((card, i) => {
             const Icon = card.icon;
             return (
-              <motion.div 
-                initial={{ opacity: 0, y: 30 }} 
-                whileInView={{ opacity: 1, y: 0 }} 
-                transition={{ duration: 0.5, delay: i * 0.1 }} 
-                key={card.title}
-              >
+              <div key={card.title} className="animate-fade-in-up" style={{ animationDelay: `${i * 0.1}s` }}>
                 <div className="glass-sustainable-card p-8 h-full flex flex-col items-center text-center cursor-pointer group" onClick={() => setSelectedSubCategory(card)}>
                   <div className="sustainable-icon-wrap w-16 h-16 rounded-full flex items-center justify-center mb-6 shadow-md transition-transform duration-300 group-hover:scale-110">
                     <Icon className="w-7 h-7 text-white" />
@@ -151,7 +139,7 @@ export default function SustainableCollection() {
                   <h4 className="text-[#1E4B2A] text-xl font-bold mb-3">{card.title}</h4>
                   <p className="text-[#3F3F3F] text-sm leading-relaxed">{card.desc}</p>
                 </div>
-              </motion.div>
+              </div>
             );
           })}
         </div>
@@ -165,7 +153,7 @@ export default function SustainableCollection() {
             They Inspire Responsibility.
           </p>
         </div>
-      </motion.div>
+      </div>
 
       {/* Products Modal */}
       {selectedSubCategory && (

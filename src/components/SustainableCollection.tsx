@@ -1,49 +1,47 @@
 import { useState, useEffect } from 'react';
-import { Crown, Briefcase, Headphones, Leaf, Gift, Sparkles, Star, X, ShoppingCart } from 'lucide-react';
+import { Leaf, Droplets, Recycle, TreePine, X, ShoppingCart } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useCart } from './CartContext';
 
-const premiumCards = [
-  { title: 'Executive Desk', desc: 'Premium desk accessories for top leadership', icon: Briefcase },
-  { title: 'Technology', desc: 'Cutting-edge tech gifts for modern executives', icon: Headphones },
-  { title: 'Sustainable Luxury', desc: 'Eco-conscious premium gifting solutions', icon: Leaf },
-  { title: 'Curated Hampers', desc: 'Bespoke hampers crafted with finest products', icon: Gift },
+const sustainableCards = [
+  { title: 'Eco Stationery Kits', desc: 'Recycled paper and plantable pens', icon: Leaf },
+  { title: 'Bamboo Drinkware', desc: 'Reusable and biodegradable materials', icon: Droplets },
+  { title: 'Wooden Accessories', desc: 'Sustainably sourced desk items', icon: Recycle },
+  { title: 'Plantable Merch', desc: 'Gifts that grow into beautiful plants', icon: TreePine },
 ];
 
-const premiumProducts: Record<string, {name: string, image: string}[]> = {
-  'Executive Desk': [
-    { name: 'Premium Wooden Desk Organizers', image: 'https://images.unsplash.com/photo-1520085601670-ee14aa5fa3e8?w=500&q=80' },
-    { name: 'Personalized Executive Name Lamps', image: 'https://images.unsplash.com/photo-1517999144091-3d9dca6d1e43?w=500&q=80' },
-    { name: 'Luxury LED Desk Clocks', image: 'https://images.unsplash.com/photo-1622445275463-afa2ab738c34?w=500&q=80' },
-    { name: 'Premium Table Décor Accessories', image: 'https://images.unsplash.com/photo-1520085601670-ee14aa5fa3e8?w=500&q=80' },
-    { name: 'Premium Leatherette Organizer', image: 'https://images.unsplash.com/photo-1531346878377-a541fa4cb5e3?w=500&q=80' },
-    { name: 'Executive Notebook & Pen Set', image: 'https://images.unsplash.com/photo-1585776245991-cf89dd7fc73a?w=500&q=80' },
-    { name: 'Smart Desk Lamp', image: 'https://images.unsplash.com/photo-1517999144091-3d9dca6d1e43?w=500&q=80' },
+const sustainableProducts: Record<string, {name: string, image: string}[]> = {
+  'Eco Stationery Kits': [
+    { name: 'Eco Stationery Kits', image: 'https://images.unsplash.com/photo-1585776245991-cf89dd7fc73a?w=500&q=80' },
+    { name: 'Recycled Paper Notebooks', image: 'https://images.unsplash.com/photo-1531346878377-a541fa4cb5e3?w=500&q=80' },
+    { name: 'Recycled Diaries', image: 'https://images.unsplash.com/photo-1585776245991-cf89dd7fc73a?w=500&q=80' },
+    { name: 'Seed Paper Notebooks', image: 'https://images.unsplash.com/photo-1531346878377-a541fa4cb5e3?w=500&q=80' },
+    { name: 'Eco-Friendly Pens', image: 'https://images.unsplash.com/photo-1585336261022-680e295ce3fe?w=500&q=80' },
   ],
-  'Technology': [
-    { name: 'Premium Metal USB Drives', image: 'https://images.unsplash.com/photo-1614944983059-e9eb7b3fcfe2?w=500&q=80' },
-    { name: 'Wireless Charging Stations', image: 'https://images.unsplash.com/photo-1622445275463-afa2ab738c34?w=500&q=80' },
-    { name: 'Executive Power Banks', image: 'https://images.unsplash.com/photo-1585338107529-13afc5f02586?w=500&q=80' },
-    { name: 'Wireless Charging Dock', image: 'https://images.unsplash.com/photo-1622445275463-afa2ab738c34?w=500&q=80' },
-    { name: 'Bluetooth Speakers', image: 'https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=500&q=80' },
-  ],
-  'Sustainable Luxury': [
+  'Bamboo Drinkware': [
     { name: 'Bamboo Bottle Gift Sets', image: 'https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=500&q=80' },
-    { name: 'Eco-Friendly Executive Kits', image: 'https://images.unsplash.com/photo-1544816155-12df9643f363?w=500&q=80' },
-    { name: 'Premium Wooden Gift Sets', image: 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=500&q=80' },
-    { name: 'Sustainable Corporate Gift Boxes', image: 'https://images.unsplash.com/photo-1513885535751-8b9238bd345a?w=500&q=80' },
+    { name: 'Bamboo Coffee Mugs', image: 'https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?w=500&q=80' },
+    { name: 'Reusable Steel Bottles', image: 'https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=500&q=80' },
+    { name: 'Insulated Eco Bottles', image: 'https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=500&q=80' },
   ],
-  'Curated Hampers': [
-    { name: 'Executive Workstation Hamper', image: 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=500&q=80' },
-    { name: 'Leadership Appreciation Hamper', image: 'https://images.unsplash.com/photo-1513885535751-8b9238bd345a?w=500&q=80' },
-    { name: 'Festive Luxury Collection', image: 'https://images.unsplash.com/photo-1513885535751-8b9238bd345a?w=500&q=80' },
-    { name: 'Premium Wellness Hamper', image: 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=500&q=80' },
+  'Wooden Accessories': [
+    { name: 'Bamboo Desk Organizers', image: 'https://images.unsplash.com/photo-1520085601670-ee14aa5fa3e8?w=500&q=80' },
+    { name: 'Wooden Pen Stands', image: 'https://images.unsplash.com/photo-1505843490538-5133c6c7d0e1?w=500&q=80' },
+    { name: 'Wooden Mobile Stands', image: 'https://images.unsplash.com/photo-1527443195645-1133f7f28990?w=500&q=80' },
+    { name: 'Wooden USB Drives', image: 'https://images.unsplash.com/photo-1614944983059-e9eb7b3fcfe2?w=500&q=80' },
+  ],
+  'Plantable Merch': [
+    { name: 'Plantable Seed Kits', image: 'https://images.unsplash.com/photo-1416879598555-220b8fa017ea?w=500&q=80' },
+    { name: 'Indoor Plant Gift Sets', image: 'https://images.unsplash.com/photo-1416879598555-220b8fa017ea?w=500&q=80' },
+    { name: 'Cotton Tote Bags', image: 'https://images.unsplash.com/photo-1544816155-12df9643f363?w=500&q=80' },
+    { name: 'Jute Bags', image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500&q=80' },
+    { name: 'Eco Event Kits', image: 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=500&q=80' },
   ]
 };
 
-export default function PremiumCollection() {
+export default function SustainableCollection() {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const [selectedSubCategory, setSelectedSubCategory] = useState<typeof premiumCards[0] | null>(null);
+  const [selectedSubCategory, setSelectedSubCategory] = useState<typeof sustainableCards[0] | null>(null);
   const { cart, addToCart, removeFromCart } = useCart();
 
   useEffect(() => {
@@ -67,25 +65,25 @@ export default function PremiumCollection() {
       className="relative py-16 lg:py-24 overflow-hidden animate-gradient-bg"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      style={{ backgroundImage: 'linear-gradient(135deg, rgba(255,247,237,0.8) 0%, rgba(255,255,255,0.8) 35%, rgba(255,237,213,0.8) 70%, rgba(255,247,237,0.8) 100%)' }}
+      style={{ backgroundImage: 'linear-gradient(135deg, rgba(248,246,241,0.8) 0%, rgba(255,255,255,0.8) 35%, rgba(233,228,218,0.8) 70%, rgba(248,246,241,0.8) 100%)' }}
     >
       <style>{`
-        .glass-premium-card {
+        .glass-sustainable-card {
           background: rgba(255, 255, 255, 0.55);
           backdrop-filter: blur(20px);
           -webkit-backdrop-filter: blur(20px);
           border: 1px solid rgba(255, 255, 255, 0.4);
           border-radius: 30px;
-          box-shadow: 0 10px 40px rgba(124, 45, 18, 0.05);
+          box-shadow: 0 10px 40px rgba(30, 75, 42, 0.05);
           transition: all 0.4s ease;
         }
-        .glass-premium-card:hover {
+        .glass-sustainable-card:hover {
           transform: translateY(-10px);
-          box-shadow: 0 25px 50px rgba(124, 45, 18, 0.1);
+          box-shadow: 0 25px 50px rgba(30, 75, 42, 0.1);
         }
-        .premium-icon-wrap {
-          background-color: #7C2D12;
-          border: 2px solid #D97706;
+        .sustainable-icon-wrap {
+          background-color: #1E4B2A;
+          border: 2px solid #C89A3D;
         }
         .elegant-script {
           font-family: 'Playfair Display', 'Didot', 'Georgia', serif;
@@ -94,25 +92,25 @@ export default function PremiumCollection() {
       `}</style>
 
       {/* Abstract Organic Blob Shapes */}
-      <div className="absolute -top-[10%] -left-[10%] w-[600px] h-[600px] bg-[#FDE68A] opacity-30 blur-[100px] rounded-full pointer-events-none" />
-      <div className="absolute top-[40%] -right-[10%] w-[500px] h-[500px] bg-[#FDBA74] opacity-20 blur-[100px] rounded-full pointer-events-none" />
-      <div className="absolute -bottom-[10%] left-[20%] w-[400px] h-[400px] bg-[#FDE68A] opacity-30 blur-[100px] rounded-full pointer-events-none" />
+      <div className="absolute -top-[10%] -left-[10%] w-[600px] h-[600px] bg-[#B9C7A6] opacity-30 blur-[100px] rounded-full pointer-events-none" />
+      <div className="absolute top-[40%] -right-[10%] w-[500px] h-[500px] bg-[#B9C7A6] opacity-20 blur-[100px] rounded-full pointer-events-none" />
+      <div className="absolute -bottom-[10%] left-[20%] w-[400px] h-[400px] bg-[#B9C7A6] opacity-30 blur-[100px] rounded-full pointer-events-none" />
 
       {/* Thin Luxury Gold Curves */}
       <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-40" preserveAspectRatio="none">
-        <path d="M-100,200 C300,400 600,0 1200,250 C1800,500 2200,100 2600,300" stroke="#D97706" strokeWidth="1" fill="none" vectorEffect="non-scaling-stroke" />
-        <path d="M-100,600 C400,400 800,800 1400,550 C2000,300 2400,700 2800,600" stroke="#D97706" strokeWidth="1" fill="none" vectorEffect="non-scaling-stroke" />
+        <path d="M-100,200 C300,400 600,0 1200,250 C1800,500 2200,100 2600,300" stroke="#C89A3D" strokeWidth="1" fill="none" vectorEffect="non-scaling-stroke" />
+        <path d="M-100,600 C400,400 800,800 1400,550 C2000,300 2400,700 2800,600" stroke="#C89A3D" strokeWidth="1" fill="none" vectorEffect="non-scaling-stroke" />
       </svg>
 
-      {/* Decorative Elements */}
+      {/* Decorative Botanical Leaves */}
       <div className="absolute top-[5%] right-[5%] opacity-20 blur-[1px] pointer-events-none transition-transform duration-700" style={{ transform: `translate(${mousePos.x * 2}px, ${mousePos.y * 2}px) rotate(15deg)` }}>
-        <Star className="w-32 h-32 text-[#7C2D12]" strokeWidth={1} />
+        <Leaf className="w-32 h-32 text-[#1E4B2A]" strokeWidth={1} />
       </div>
       <div className="absolute bottom-[15%] left-[5%] opacity-20 blur-[2px] pointer-events-none transition-transform duration-700" style={{ transform: `translate(${mousePos.x * -1.5}px, ${mousePos.y * -1.5}px) rotate(-15deg)` }}>
-        <Crown className="w-40 h-40 text-[#9A3412]" strokeWidth={1.5} />
+        <Leaf className="w-40 h-40 text-[#5D7A4B]" strokeWidth={1.5} />
       </div>
       <div className="absolute bottom-[5%] right-[10%] opacity-20 blur-[1px] pointer-events-none transition-transform duration-700" style={{ transform: `translate(${mousePos.x * 1}px, ${mousePos.y * 1}px) rotate(45deg)` }}>
-        <Sparkles className="w-24 h-24 text-[#D97706]" strokeWidth={1} />
+        <Leaf className="w-24 h-24 text-[#C89A3D]" strokeWidth={1} />
       </div>
 
       <motion.div 
@@ -124,20 +122,20 @@ export default function PremiumCollection() {
       >
         {/* Section Header */}
         <div className="text-center mb-16 flex flex-col items-center">
-          <h3 className="text-[#D97706] text-[20px] lg:text-[26px] font-medium mb-4 tracking-wide">
-            Curated for Leaders Who Deserve the Finest
+          <h3 className="text-[#C89A3D] text-[20px] lg:text-[26px] font-medium mb-4 tracking-wide">
+            Thoughtfully Crafted for a Greener Future
           </h3>
-          <h2 className="text-[#7C2D12] text-[40px] lg:text-[56px] font-bold mb-6 leading-tight tracking-tight">
-            Premium Corporate Gifting
+          <h2 className="text-[#1E4B2A] text-[40px] lg:text-[56px] font-bold mb-6 leading-tight tracking-tight">
+            Sustainable Corporate Gifting
           </h2>
           <p className="text-[#3F3F3F] text-[16px] lg:text-[18px] leading-[1.8] max-w-[700px]">
-            Designed for leadership teams, key clients, and executive appreciation programs. Every gift speaks of unparalleled quality and profound thoughtfulness.
+            Eco-friendly gifting solutions designed to create meaningful impressions while supporting sustainability and responsible business practices.
           </p>
         </div>
 
         {/* Product Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 w-full mb-24">
-          {premiumCards.map((card, i) => {
+          {sustainableCards.map((card, i) => {
             const Icon = card.icon;
             return (
               <motion.div 
@@ -146,11 +144,11 @@ export default function PremiumCollection() {
                 transition={{ duration: 0.5, delay: i * 0.1 }} 
                 key={card.title}
               >
-                <div className="glass-premium-card p-8 h-full flex flex-col items-center text-center cursor-pointer group" onClick={() => setSelectedSubCategory(card)}>
-                  <div className="premium-icon-wrap w-16 h-16 rounded-full flex items-center justify-center mb-6 shadow-md transition-transform duration-300 group-hover:scale-110">
+                <div className="glass-sustainable-card p-8 h-full flex flex-col items-center text-center cursor-pointer group" onClick={() => setSelectedSubCategory(card)}>
+                  <div className="sustainable-icon-wrap w-16 h-16 rounded-full flex items-center justify-center mb-6 shadow-md transition-transform duration-300 group-hover:scale-110">
                     <Icon className="w-7 h-7 text-white" />
                   </div>
-                  <h4 className="text-[#7C2D12] text-xl font-bold mb-3">{card.title}</h4>
+                  <h4 className="text-[#1E4B2A] text-xl font-bold mb-3">{card.title}</h4>
                   <p className="text-[#3F3F3F] text-sm leading-relaxed">{card.desc}</p>
                 </div>
               </motion.div>
@@ -158,13 +156,13 @@ export default function PremiumCollection() {
           })}
         </div>
 
-        {/* Premium Footer Line */}
+        {/* Sustainable Footer Line */}
         <div className="text-center mt-8 relative">
-          <p className="text-[28px] lg:text-[42px] font-bold text-[#7C2D12] mb-3 tracking-tight">
-            Because Great Leaders Don't Just Work.
+          <p className="text-[28px] lg:text-[42px] font-bold text-[#1E4B2A] mb-3 tracking-tight">
+            Because Great Brands Don't Just Gift.
           </p>
-          <p className="elegant-script text-[36px] lg:text-[48px] text-[#D97706]">
-            They Inspire Greatness.
+          <p className="elegant-script text-[36px] lg:text-[48px] text-[#C89A3D]">
+            They Inspire Responsibility.
           </p>
         </div>
       </motion.div>
@@ -191,7 +189,7 @@ export default function PremiumCollection() {
             </div>
             <div className="p-6 md:p-8 overflow-y-auto custom-scrollbar bg-slate-50 flex-1">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {premiumProducts[selectedSubCategory.title]?.map((p) => {
+                {sustainableProducts[selectedSubCategory.title]?.map((p) => {
                   const isAdded = cart.some(item => item.name === p.name);
                   return (
                     <div key={p.name} className="bg-white rounded-[20px] p-4 shadow-sm border border-gray-100 hover:shadow-md transition-shadow group flex flex-col">
@@ -202,7 +200,7 @@ export default function PremiumCollection() {
                       <button 
                         onClick={() => isAdded ? removeFromCart(p.name) : addToCart({ name: p.name, image: p.image, tag: selectedSubCategory.title })}
                         className={`w-full py-2.5 rounded-xl text-xs font-bold uppercase tracking-wide transition-colors flex items-center justify-center gap-2 ${
-                          isAdded ? 'bg-[#D97706] text-white hover:bg-[#B45309]' : 'bg-[#7C2D12] text-white hover:bg-[#431407]'
+                          isAdded ? 'bg-[#C89A3D] text-white hover:bg-[#B4842E]' : 'bg-[#1E4B2A] text-white hover:bg-[#11311B]'
                         }`}
                       >
                         <ShoppingCart className="w-4 h-4" /> {isAdded ? 'Added ✓' : 'Add to Quote'}

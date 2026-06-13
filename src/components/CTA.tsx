@@ -1,5 +1,5 @@
-import React from 'react';
-import { Mail, Phone, Send, X, Globe } from 'lucide-react';
+import React, { useState } from 'react';
+import { Mail, Phone, Send, X, Gift, Sparkles, Globe } from 'lucide-react';
 import { useCart } from './CartContext';
 
 export default function CTA() {
@@ -21,139 +21,175 @@ export default function CTA() {
     window.location.href = `mailto:key2brand360@gmail.com?subject=${subject}&body=${body}`;
   };
 
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    const x = (e.clientX / window.innerWidth - 0.5) * 30;
+    const y = (e.clientY / window.innerHeight - 0.5) * 30;
+    setMousePos({ x, y });
+  };
+
+  const handleMouseLeave = () => {
+    setMousePos({ x: 0, y: 0 });
+  };
+
   return (
-    <section id="contact" className="py-24 bg-white">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="relative bg-gradient-to-br from-orange-500 via-orange-500 to-orange-600 rounded-[32px] overflow-hidden">
-          {/* Background decorations */}
-          <div className="absolute top-0 right-0 w-96 h-96 rounded-full bg-white opacity-5 -translate-y-1/2 translate-x-1/2" />
-          <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full bg-white opacity-5 translate-y-1/2 -translate-x-1/2" />
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-white opacity-[0.03]" />
+    <>
+      <style>{`
+        @keyframes gradient-bg {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+        .animate-gradient-bg {
+          animation: gradient-bg 15s ease infinite;
+          background-size: 400% 400%;
+        }
+      `}</style>
+      <section 
+        id="contact" 
+        className="bg-white"
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+      >
+        <div 
+          className="rounded-t-[40px] lg:rounded-t-[80px] pt-24 lg:pt-32 pb-24 px-6 lg:px-8 relative overflow-hidden mt-10 shadow-[0_-20px_40px_rgba(0,0,0,0.05)] animate-gradient-bg"
+          style={{ backgroundImage: 'linear-gradient(-45deg, #07111F, #0F172A, #1E293B, #07111F)' }}
+        >
+        
+        {/* Ambient Premium Lighting */}
+        <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[radial-gradient(circle_at_center,rgba(255,122,0,0.1)_0%,transparent_60%)] blur-[120px] pointer-events-none transition-transform duration-300 ease-out" style={{ transform: `translate(${mousePos.x * 2}px, ${mousePos.y * 2}px)` }} />
+        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[radial-gradient(circle_at_center,rgba(214,163,84,0.1)_0%,transparent_60%)] blur-[120px] pointer-events-none transition-transform duration-300 ease-out" style={{ transform: `translate(${mousePos.x * -2}px, ${mousePos.y * -2}px)` }} />
 
-          <div className="relative z-10 p-8 md:p-12 lg:p-16">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        {/* Floating Theme Elements */}
+        <div className="absolute top-[15%] left-[5%] text-[#FF7A00]/20 animate-bounce transition-transform duration-300 pointer-events-none" style={{ transform: `translate(${mousePos.x * 1.5}px, ${mousePos.y * 1.5}px)` }}>
+          <Gift className="w-16 h-16" />
+        </div>
+        <div className="absolute bottom-[20%] right-[40%] text-[#D6A354]/20 animate-pulse transition-transform duration-300 pointer-events-none" style={{ transform: `translate(${mousePos.x * -1.5}px, ${mousePos.y * -1.5}px)` }}>
+          <Sparkles className="w-10 h-10" />
+        </div>
+
+        <div className="max-w-[1400px] mx-auto relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
               
-              {/* Left Content */}
-              <div>
-                {/* Badge */}
-                <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm border border-white/30 rounded-full px-4 py-2 mb-8">
-                  <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
-                  <span className="font-manrope text-sm font-semibold text-white">
-                    Let's Create Something Special
-                  </span>
-                </div>
+            {/* Left Content */}
+            <div className="transition-transform duration-300 ease-out" style={{ transform: `translate(${mousePos.x * 0.5}px, ${mousePos.y * 0.5}px)` }}>
+              <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/5 backdrop-blur-md border border-white/10 mb-8 shadow-lg">
+                <Gift className="w-4 h-4 text-[#FF7A00]" />
+                <span className="font-manrope text-xs font-bold uppercase tracking-[0.2em] text-white">Let's Create Together</span>
+              </div>
 
-                {/* Heading */}
-                <h2 className="font-sora font-extrabold text-4xl md:text-5xl lg:text-6xl text-white mb-6 leading-tight">
-                  Connect With
-                  <br />
-                  Us For Your Gifting Needs
-                </h2>
+              <h2 className="font-sora font-black text-5xl md:text-6xl lg:text-[72px] text-white mb-6 leading-[1.05] tracking-tight">
+                Build Something <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF7A00] to-[#D6A354]">Memorable.</span>
+              </h2>
 
-                {/* Subtext */}
-                <p className="font-dm text-orange-100 text-lg leading-relaxed mb-10 max-w-xl">
-                  Premium, customized corporate gifting solutions made simple.
-                </p>
+              <p className="font-dm text-white/60 text-xl leading-relaxed mb-12 max-w-lg">
+                From bulk orders to highly bespoke luxury gifts, our experts are ready to curate the perfect experience for your brand.
+              </p>
 
-                {/* Use case chips */}
-                <div className="flex flex-wrap gap-2 mb-12">
-                  {['Custom Branding', 'Premium Quality', 'Pan India Delivery'].map((item) => (
-                    <span key={item} className="font-dm text-sm text-white bg-white/15 border border-white/25 rounded-full px-4 py-1.5 font-medium backdrop-blur-sm">
-                      {item}
-                    </span>
-                  ))}
-                </div>
+              {/* Direct Contact Info Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <a href="https://wa.me/918959817421" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 text-white group bg-white/5 border border-white/5 rounded-2xl p-4 hover:bg-white/10 transition-colors">
+                  <div className="w-12 h-12 rounded-xl bg-[#FF7A00]/20 flex items-center justify-center">
+                    <Phone className="w-5 h-5 text-[#FF7A00]" />
+                  </div>
+                  <div>
+                    <p className="font-dm text-xs text-white/50 uppercase tracking-widest mb-1">WhatsApp Us</p>
+                    <p className="font-manrope font-bold text-lg">+91 8959817421</p>
+                  </div>
+                </a>
+                
+                <a href="mailto:key2brand360@gmail.com" className="flex items-center gap-4 text-white group bg-white/5 border border-white/5 rounded-2xl p-4 hover:bg-white/10 transition-colors">
+                  <div className="w-12 h-12 rounded-xl bg-[#D6A354]/20 flex items-center justify-center">
+                    <Mail className="w-5 h-5 text-[#D6A354]" />
+                  </div>
+                  <div>
+                    <p className="font-dm text-xs text-white/50 uppercase tracking-widest mb-1">Email Us</p>
+                    <p className="font-manrope font-bold text-sm">key2brand360@gmail.com</p>
+                  </div>
+                </a>
 
-                {/* Direct Contact Info */}
-                <div className="flex flex-wrap gap-6">
-                  <a href="tel:8959817421" className="flex items-center gap-3 text-white group">
-                    <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center border border-white/20 group-hover:bg-white/20 transition-colors">
-                      <Phone className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <p className="font-dm text-xs text-orange-200 mb-0.5">Call Us Directly</p>
-                      <p className="font-manrope font-bold">+91 8959817421</p>
-                    </div>
-                  </a>
-                  <a href="mailto:key2brand360@gmail.com" className="flex items-center gap-3 text-white group">
-                    <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center border border-white/20 group-hover:bg-white/20 transition-colors">
-                      <Mail className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <p className="font-dm text-xs text-orange-200 mb-0.5">Email Us</p>
-                      <p className="font-manrope font-bold">key2brand360@gmail.com</p>
-                    </div>
-                  </a>
-                  <a href="https://key2brand.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-white group">
-                    <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center border border-white/20 group-hover:bg-white/20 transition-colors">
-                      <Globe className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <p className="font-dm text-xs text-orange-200 mb-0.5">Visit Website</p>
-                      <p className="font-manrope font-bold">key2brand.com</p>
-                    </div>
-                  </a>
+                <a href="https://key2brand.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 text-white group bg-white/5 border border-white/5 rounded-2xl p-4 hover:bg-white/10 transition-colors sm:col-span-2">
+                  <div className="w-12 h-12 rounded-xl bg-[#EC4899]/20 flex items-center justify-center">
+                    <Globe className="w-5 h-5 text-[#EC4899]" />
+                  </div>
+                  <div>
+                    <p className="font-dm text-xs text-white/50 uppercase tracking-widest mb-1">Visit Website</p>
+                    <p className="font-manrope font-bold text-lg">key2brand.com</p>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            {/* Right Content - Premium Contact Form */}
+            <div className="bg-[#0B1324] border border-white/10 rounded-[32px] p-8 lg:p-12 shadow-[0_20px_60px_rgba(0,0,0,0.5)] relative overflow-hidden transition-transform duration-300 ease-out" style={{ transform: `translate(${mousePos.x * -0.5}px, ${mousePos.y * -0.5}px)` }}>
+              
+              {/* Gifting Ribbon */}
+              <div className="absolute top-0 right-0 w-32 h-32 overflow-hidden rounded-tr-[32px] pointer-events-none z-0">
+                <div className="absolute top-6 -right-10 w-40 h-8 bg-gradient-to-r from-[#FF7A00] to-[#D6A354] flex items-center justify-center font-sora text-[10px] font-extrabold text-white uppercase tracking-widest shadow-lg transform rotate-45">
+                  Gifting
                 </div>
               </div>
 
-              {/* Right Content - Contact Form */}
-              <div className="bg-white rounded-[24px] p-6 sm:p-8 shadow-2xl">
-                <h3 className="font-sora font-bold text-2xl text-slate-900 mb-2">Get a Quote</h3>
-                <p className="font-dm text-sm text-slate-500 mb-6">Fill out the form below and our gifting experts will get back to you shortly.</p>
+              <div className="relative z-10">
+                <h3 className="font-sora font-bold text-3xl text-white mb-2">Request a Quote</h3>
+                <p className="font-dm text-white/50 text-sm mb-8">Share your requirements and our gifting experts will connect with you.</p>
                 
-                <form className="space-y-4" onSubmit={handleSubmit}>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="space-y-1.5">
-                      <label htmlFor="name" className="font-dm text-xs font-semibold text-slate-700 ml-1">Full Name</label>
-                      <input type="text" id="name" name="name" placeholder="full name" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 font-dm text-sm focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500 transition-all" required />
+                <form className="space-y-5" onSubmit={handleSubmit}>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                    <div className="space-y-2">
+                      <label htmlFor="name" className="font-dm text-xs font-bold uppercase tracking-widest text-white/70">Full Name</label>
+                      <input type="text" id="name" name="name" placeholder="Full Name" className="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 font-dm text-white placeholder-white/20 focus:outline-none focus:ring-2 focus:ring-[#FF7A00]/50 focus:border-[#FF7A00] transition-all" required />
                     </div>
-                    <div className="space-y-1.5">
-                      <label htmlFor="phone" className="font-dm text-xs font-semibold text-slate-700 ml-1">Phone Number</label>
-                      <input type="tel" id="phone" name="phone" placeholder="phone number" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 font-dm text-sm focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500 transition-all" required />
+                    <div className="space-y-2">
+                      <label htmlFor="phone" className="font-dm text-xs font-bold uppercase tracking-widest text-white/70">Phone Number</label>
+                      <input type="tel" id="phone" name="phone" placeholder="Phone Number" className="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 font-dm text-white placeholder-white/20 focus:outline-none focus:ring-2 focus:ring-[#FF7A00]/50 focus:border-[#FF7A00] transition-all" required />
                     </div>
                   </div>
                   
-                  <div className="space-y-1.5">
-                    <label htmlFor="email" className="font-dm text-xs font-semibold text-slate-700 ml-1">Work Email</label>
-                    <input type="email" id="email" name="email" placeholder="work email" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 font-dm text-sm focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500 transition-all" required />
+                  <div className="space-y-2">
+                    <label htmlFor="email" className="font-dm text-xs font-bold uppercase tracking-widest text-white/70">Work Email</label>
+                    <input type="email" id="email" name="email" placeholder="Email Address" className="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 font-dm text-white placeholder-white/20 focus:outline-none focus:ring-2 focus:ring-[#FF7A00]/50 focus:border-[#FF7A00] transition-all" required />
                   </div>
 
-                  <div className="space-y-1.5">
-                    <label htmlFor="company" className="font-dm text-xs font-semibold text-slate-700 ml-1">Company Name</label>
-                    <input type="text" id="company" name="company" placeholder="company name" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 font-dm text-sm focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500 transition-all" required />
+                  <div className="space-y-2">
+                    <label htmlFor="company" className="font-dm text-xs font-bold uppercase tracking-widest text-white/70">Company Name</label>
+                    <input type="text" id="company" name="company" placeholder="Company Name" className="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 font-dm text-white placeholder-white/20 focus:outline-none focus:ring-2 focus:ring-[#FF7A00]/50 focus:border-[#FF7A00] transition-all" required />
                   </div>
 
                   {cart.length > 0 && (
                     <div className="space-y-2 pt-2">
-                      <label className="font-dm text-xs font-semibold text-slate-700 ml-1">Selected Products ({cart.length})</label>
-                      <div className="flex flex-wrap gap-2 p-3 bg-slate-50 border border-slate-200 rounded-xl max-h-32 overflow-y-auto custom-scrollbar">
-                        {cart.map((p) => (
-                          <span key={p.name} className="inline-flex items-center gap-1.5 bg-white border border-slate-200 text-slate-600 text-xs px-2.5 py-1.5 rounded-lg shadow-sm">
-                            {p.name}
-                            <button type="button" onClick={() => removeFromCart(p.name)} className="text-slate-400 hover:text-red-500 transition-colors">
-                              <X className="w-3 h-3" />
-                            </button>
-                          </span>
-                        ))}
+                      <label className="font-dm text-xs font-bold uppercase tracking-widest text-white/70">Selected Items ({cart.length})</label>
+                      <div className="flex flex-wrap gap-2 p-4 bg-white/5 border border-white/10 rounded-2xl max-h-32 overflow-y-auto custom-scrollbar">
+                          {cart.map((p) => (
+                            <span key={p.name} className="inline-flex items-center gap-2 bg-[#0B1324] border border-white/10 text-white/80 text-xs px-3 py-2 rounded-xl shadow-sm">
+                              {p.name}
+                              <button type="button" onClick={() => removeFromCart(p.name)} className="text-white/40 hover:text-red-400 transition-colors">
+                                <X className="w-3 h-3" />
+                              </button>
+                            </span>
+                          ))}
                       </div>
                     </div>
                   )}
 
-                  <div className="space-y-1.5">
-                    <label htmlFor="message" className="font-dm text-xs font-semibold text-slate-700 ml-1">Your Requirements</label>
-                    <textarea id="message" name="message" rows={3} placeholder="Tell us about your gifting needs, quantity, and budget..." className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 font-dm text-sm focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500 transition-all resize-none" required></textarea>
+                  <div className="space-y-2">
+                    <label htmlFor="message" className="font-dm text-xs font-bold uppercase tracking-widest text-white/70">Your Requirements</label>
+                    <textarea id="message" name="message" rows={3} placeholder="Tell us about your gifting needs, quantity, and budget..." className="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 font-dm text-white placeholder-white/20 focus:outline-none focus:ring-2 focus:ring-[#FF7A00]/50 focus:border-[#FF7A00] transition-all resize-none" required></textarea>
                   </div>
 
-                  <button type="submit" className="w-full flex items-center justify-center gap-2 bg-slate-900 text-white font-manrope font-bold rounded-xl py-3.5 mt-2 hover:bg-orange-500 transition-colors duration-300">
-                    Send Enquiry <Send className="w-4 h-4" />
+                  <button type="submit" className="w-full flex items-center justify-center gap-3 bg-gradient-to-r from-[#FF7A00] to-[#E66A00] text-white font-manrope font-bold rounded-2xl py-4 mt-4 hover:shadow-[0_10px_30px_rgba(255,122,0,0.3)] transition-all duration-300 hover:-translate-y-1 group">
+                    Submit Enquiry <Send className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                   </button>
                 </form>
               </div>
-
             </div>
+
           </div>
         </div>
       </div>
     </section>
+    </>
   );
 }

@@ -1,191 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Gift, Briefcase, ShoppingBag, CheckCircle2, Leaf, X, ArrowRight } from 'lucide-react';
-import { useCart, Product } from './CartContext';
+import PremiumCollection from './PremiumCollection';
+import StandardCollection from './StandardCollection';
+import RegularCollection from './RegularCollection';
+import SustainableCollection from './SustainableCollection';
 
-const premiumProducts = [
-  // Executive Desk Collection
-  { name: 'Premium Wooden Desk Organizers', image: 'https://images.unsplash.com/photo-1520085601670-ee14aa5fa3e8?w=500&q=80', tag: 'Desk' },
-  { name: 'Personalized Executive Name Lamps', image: 'https://images.unsplash.com/photo-1517999144091-3d9dca6d1e43?w=500&q=80', tag: 'Desk' },
-  { name: 'Luxury LED Desk Clocks', image: 'https://images.unsplash.com/photo-1622445275463-afa2ab738c34?w=500&q=80', tag: 'Desk' },
-  { name: 'Premium Table Décor Accessories', image: 'https://images.unsplash.com/photo-1520085601670-ee14aa5fa3e8?w=500&q=80', tag: 'Desk' },
-  { name: 'Premium Leatherette Organizer', image: 'https://images.unsplash.com/photo-1531346878377-a541fa4cb5e3?w=500&q=80', tag: 'Desk' },
-  { name: 'Executive Notebook & Pen Set', image: 'https://images.unsplash.com/photo-1585776245991-cf89dd7fc73a?w=500&q=80', tag: 'Stationery' },
-  { name: 'Smart Desk Lamp', image: 'https://images.unsplash.com/photo-1517999144091-3d9dca6d1e43?w=500&q=80', tag: 'Desk' },
-  // Technology Collection
-  { name: 'Premium Metal USB Drives', image: 'https://images.unsplash.com/photo-1614944983059-e9eb7b3fcfe2?w=500&q=80', tag: 'Tech' },
-  { name: 'Wireless Charging Stations', image: 'https://images.unsplash.com/photo-1622445275463-afa2ab738c34?w=500&q=80', tag: 'Tech' },
-  { name: 'Wireless Charging Dock', image: 'https://images.unsplash.com/photo-1622445275463-afa2ab738c34?w=500&q=80', tag: 'Tech' },
-  { name: 'Bluetooth Speakers', image: 'https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=500&q=80', tag: 'Tech' },
-  { name: 'Executive Power Banks', image: 'https://images.unsplash.com/photo-1585338107529-13afc5f02586?w=500&q=80', tag: 'Tech' },
-  // Sustainable Luxury Collection
-  { name: 'Bamboo Bottle Gift Sets', image: 'https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=500&q=80', tag: 'Eco' },
-  { name: 'Premium Wooden Gift Sets', image: 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=500&q=80', tag: 'Eco' },
-  { name: 'Eco-Friendly Executive Kits', image: 'https://images.unsplash.com/photo-1544816155-12df9643f363?w=500&q=80', tag: 'Eco' },
-  { name: 'Sustainable Corporate Gift Boxes', image: 'https://images.unsplash.com/photo-1513885535751-8b9238bd345a?w=500&q=80', tag: 'Eco' },
-  // Premium Lifestyle & Wellness Collection
-  { name: 'Vacuum Flask Gift Set', image: 'https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=500&q=80', tag: 'Wellness' },
-  { name: 'Aroma Diffuser', image: 'https://images.unsplash.com/photo-1602928321679-560bb453f190?w=500&q=80', tag: 'Wellness' },
-  { name: 'Corporate Wellness Hamper', image: 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=500&q=80', tag: 'Wellness' },
-  // Premium Gift Hampers
-  { name: 'Executive Workstation Hamper', image: 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=500&q=80', tag: 'Hamper' },
-  { name: 'Leadership Appreciation Hamper', image: 'https://images.unsplash.com/photo-1513885535751-8b9238bd345a?w=500&q=80', tag: 'Hamper' },
-  { name: 'Festive Luxury Collection', image: 'https://images.unsplash.com/photo-1513885535751-8b9238bd345a?w=500&q=80', tag: 'Hamper' },
-  { name: 'Premium Wellness Hamper', image: 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=500&q=80', tag: 'Hamper' },
-];
-
-const standardProducts = [
-  // Workspace Essentials
-  { name: 'Customized Pen Stands', image: 'https://images.unsplash.com/photo-1520085601670-ee14aa5fa3e8?w=500&q=80', tag: 'Workspace' },
-  { name: 'Desk Organizers', image: 'https://images.unsplash.com/photo-1505843490538-5133c6c7d0e1?w=500&q=80', tag: 'Workspace' },
-  { name: 'Personalized Calendars', image: 'https://images.unsplash.com/photo-1585776245991-cf89dd7fc73a?w=500&q=80', tag: 'Workspace' },
-  { name: 'Sticky Notes & Productivity Kits', image: 'https://images.unsplash.com/photo-1531346878377-a541fa4cb5e3?w=500&q=80', tag: 'Workspace' },
-  { name: 'Desktop Organizers', image: 'https://images.unsplash.com/photo-1520085601670-ee14aa5fa3e8?w=500&q=80', tag: 'Workspace' },
-  { name: 'Office Productivity Kits', image: 'https://images.unsplash.com/photo-1585336261022-680e295ce3fe?w=500&q=80', tag: 'Workspace' },
-  // Technology Essentials
-  { name: 'Card Style USB Drives', image: 'https://images.unsplash.com/photo-1585338107529-13afc5f02586?w=500&q=80', tag: 'Tech' },
-  { name: 'Branded Pendrives', image: 'https://images.unsplash.com/photo-1614944983059-e9eb7b3fcfe2?w=500&q=80', tag: 'Tech' },
-  { name: 'Digital Alarm Clocks', image: 'https://images.unsplash.com/photo-1622445275463-afa2ab738c34?w=500&q=80', tag: 'Tech' },
-  { name: 'Digital Desk Clocks', image: 'https://images.unsplash.com/photo-1622445275463-afa2ab738c34?w=500&q=80', tag: 'Tech' },
-  { name: 'Mobile Accessories', image: 'https://images.unsplash.com/photo-1585338107529-13afc5f02586?w=500&q=80', tag: 'Tech' },
-  { name: 'Mobile Stands', image: 'https://images.unsplash.com/photo-1527443195645-1133f7f28990?w=500&q=80', tag: 'Tech' },
-  // Utility Gift Sets
-  { name: 'Corporate Desk Kits', image: 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=500&q=80', tag: 'Utility' },
-  { name: 'Personalized Office Accessories', image: 'https://images.unsplash.com/photo-1505843490538-5133c6c7d0e1?w=500&q=80', tag: 'Utility' },
-  { name: 'Daily Utility Gift Boxes', image: 'https://images.unsplash.com/photo-1513885535751-8b9238bd345a?w=500&q=80', tag: 'Utility' },
-  { name: 'Utility Gift Sets', image: 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=500&q=80', tag: 'Utility' },
-  // Drinkware Collection
-  { name: 'Insulated Bottles', image: 'https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=500&q=80', tag: 'Drinkware' },
-  { name: 'Premium Coffee Mugs', image: 'https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?w=500&q=80', tag: 'Drinkware' },
-  { name: 'Vacuum Bottles', image: 'https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=500&q=80', tag: 'Drinkware' },
-  // Eco-Friendly Collection
-  { name: 'Eco Stationery Kits', image: 'https://images.unsplash.com/photo-1585776245991-cf89dd7fc73a?w=500&q=80', tag: 'Eco' },
-  { name: 'Wooden USB Drives', image: 'https://images.unsplash.com/photo-1614944983059-e9eb7b3fcfe2?w=500&q=80', tag: 'Eco' },
-  { name: 'Sustainable Office Essentials', image: 'https://images.unsplash.com/photo-1520085601670-ee14aa5fa3e8?w=500&q=80', tag: 'Eco' },
-  { name: 'Recycled Paper Products', image: 'https://images.unsplash.com/photo-1531346878377-a541fa4cb5e3?w=500&q=80', tag: 'Eco' },
-];
-
-const regularProducts = [
-  // Office Essentials
-  { name: 'Branded Pen Sets', image: 'https://images.unsplash.com/photo-1585336261022-680e295ce3fe?w=500&q=80', tag: 'Office' },
-  { name: 'Notebooks', image: 'https://images.unsplash.com/photo-1585776245991-cf89dd7fc73a?w=500&q=80', tag: 'Office' },
-  { name: 'Diaries', image: 'https://images.unsplash.com/photo-1531346878377-a541fa4cb5e3?w=500&q=80', tag: 'Office' },
-  { name: 'Desk Calendars', image: 'https://images.unsplash.com/photo-1585776245991-cf89dd7fc73a?w=500&q=80', tag: 'Office' },
-  { name: 'Mouse Pads', image: 'https://images.unsplash.com/photo-1505843490538-5133c6c7d0e1?w=500&q=80', tag: 'Office' },
-  { name: 'Sticky Notes', image: 'https://images.unsplash.com/photo-1531346878377-a541fa4cb5e3?w=500&q=80', tag: 'Office' },
-  // Utility Products
-  { name: 'USB Drives', image: 'https://images.unsplash.com/photo-1614944983059-e9eb7b3fcfe2?w=500&q=80', tag: 'Utility' },
-  { name: 'Desk Accessories', image: 'https://images.unsplash.com/photo-1520085601670-ee14aa5fa3e8?w=500&q=80', tag: 'Utility' },
-  { name: 'Mobile Holders', image: 'https://images.unsplash.com/photo-1527443195645-1133f7f28990?w=500&q=80', tag: 'Utility' },
-  { name: 'Productivity Kits', image: 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=500&q=80', tag: 'Utility' },
-  // Event & Promotional Gifts
-  { name: 'Conference Kits', image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500&q=80', tag: 'Event' },
-  { name: 'Training Program Gifts', image: 'https://images.unsplash.com/photo-1585776245991-cf89dd7fc73a?w=500&q=80', tag: 'Event' },
-  { name: 'Employee Welcome Kits', image: 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=500&q=80', tag: 'Event' },
-  { name: 'Employee Joining Kits', image: 'https://images.unsplash.com/photo-1513885535751-8b9238bd345a?w=500&q=80', tag: 'Event' },
-  { name: 'Promotional Merchandise', image: 'https://images.unsplash.com/photo-1544816155-12df9643f363?w=500&q=80', tag: 'Event' },
-  { name: 'Event Giveaways', image: 'https://images.unsplash.com/photo-1585336261022-680e295ce3fe?w=500&q=80', tag: 'Event' },
-  // Everyday Corporate Gifts
-  { name: 'Pens', image: 'https://images.unsplash.com/photo-1585336261022-680e295ce3fe?w=500&q=80', tag: 'Everyday' },
-  { name: 'Keychains', image: 'https://images.unsplash.com/photo-1585338107529-13afc5f02586?w=500&q=80', tag: 'Everyday' },
-  { name: 'Coffee Mugs', image: 'https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?w=500&q=80', tag: 'Everyday' },
-  { name: 'Lanyards', image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500&q=80', tag: 'Everyday' },
-  { name: 'ID Card Holders', image: 'https://images.unsplash.com/photo-1531346878377-a541fa4cb5e3?w=500&q=80', tag: 'Everyday' },
-  { name: 'Desk Utilities', image: 'https://images.unsplash.com/photo-1520085601670-ee14aa5fa3e8?w=500&q=80', tag: 'Everyday' },
-];
-
-const sustainableProducts = [
-  // Eco Stationery
-  { name: 'Eco Stationery Kits', image: 'https://images.unsplash.com/photo-1585776245991-cf89dd7fc73a?w=500&q=80', tag: 'Office' },
-  { name: 'Recycled Paper Notebooks', image: 'https://images.unsplash.com/photo-1531346878377-a541fa4cb5e3?w=500&q=80', tag: 'Office' },
-  { name: 'Recycled Diaries', image: 'https://images.unsplash.com/photo-1585776245991-cf89dd7fc73a?w=500&q=80', tag: 'Office' },
-  { name: 'Seed Paper Notebooks', image: 'https://images.unsplash.com/photo-1531346878377-a541fa4cb5e3?w=500&q=80', tag: 'Office' },
-  { name: 'Eco-Friendly Pens', image: 'https://images.unsplash.com/photo-1585336261022-680e295ce3fe?w=500&q=80', tag: 'Office' },
-  // Sustainable Desk Accessories
-  { name: 'Bamboo Desk Organizers', image: 'https://images.unsplash.com/photo-1520085601670-ee14aa5fa3e8?w=500&q=80', tag: 'Desk' },
-  { name: 'Wooden Pen Stands', image: 'https://images.unsplash.com/photo-1505843490538-5133c6c7d0e1?w=500&q=80', tag: 'Desk' },
-  { name: 'Wooden Mobile Stands', image: 'https://images.unsplash.com/photo-1527443195645-1133f7f28990?w=500&q=80', tag: 'Desk' },
-  { name: 'Wooden USB Drives', image: 'https://images.unsplash.com/photo-1614944983059-e9eb7b3fcfe2?w=500&q=80', tag: 'Desk' },
-  // Eco Drinkware
-  { name: 'Bamboo Bottle Gift Sets', image: 'https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=500&q=80', tag: 'Drinkware' },
-  { name: 'Reusable Steel Bottles', image: 'https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=500&q=80', tag: 'Drinkware' },
-  { name: 'Insulated Eco Bottles', image: 'https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=500&q=80', tag: 'Drinkware' },
-  { name: 'Bamboo Coffee Mugs', image: 'https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?w=500&q=80', tag: 'Drinkware' },
-  // Sustainable Gift Sets
-  { name: 'Eco-Friendly Executive Kits', image: 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=500&q=80', tag: 'Gift Set' },
-  { name: 'Sustainable Office Essentials', image: 'https://images.unsplash.com/photo-1520085601670-ee14aa5fa3e8?w=500&q=80', tag: 'Gift Set' },
-  { name: 'Green Corporate Gift Boxes', image: 'https://images.unsplash.com/photo-1513885535751-8b9238bd345a?w=500&q=80', tag: 'Gift Set' },
-  { name: 'Eco Wellness Kit', image: 'https://images.unsplash.com/photo-1602928321679-560bb453f190?w=500&q=80', tag: 'Gift Set' },
-  // Environment-Friendly Merchandise
-  { name: 'Cotton Tote Bags', image: 'https://images.unsplash.com/photo-1544816155-12df9643f363?w=500&q=80', tag: 'Merch' },
-  { name: 'Jute Bags', image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500&q=80', tag: 'Merch' },
-  { name: 'Plantable Seed Kits', image: 'https://images.unsplash.com/photo-1416879598555-220b8fa017ea?w=500&q=80', tag: 'Merch' },
-  { name: 'Indoor Plant Gift Sets', image: 'https://images.unsplash.com/photo-1416879598555-220b8fa017ea?w=500&q=80', tag: 'Merch' },
-  { name: 'Eco Event Kits', image: 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=500&q=80', tag: 'Merch' },
-];
-
-function ProductCard({ product }: { product: Product }) {
-  const { cart, addToCart, removeFromCart } = useCart();
-  const isAdded = cart.some((p) => p.name === product.name);
-
-  return (
-    <div className="bg-[#FFFFFF] rounded-[32px] p-5 shadow-[0px_10px_30px_rgba(0,0,0,0.08)] border border-[#EAEAEA] flex flex-col relative overflow-hidden group hover:-translate-y-1 transition-all duration-300">
-      {/* Image (Approx 45% of card height) */}
-      <div className="w-full h-[150px] flex-shrink-0 mb-4 rounded-[24px] overflow-hidden">
-        <img 
-          src={product.image} 
-          alt={product.name}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-        />
-      </div>
-      
-      {/* Content Section */}
-      <div className="flex flex-col flex-1">
-        {/* Name & Verification Badge */}
-        <div className="flex items-center gap-1.5 mb-1.5">
-          <h3 className="text-[#1A1A1A] text-sm font-bold tracking-tight truncate">
-            {product.name}
-          </h3>
-          <svg className="w-4 h-4 text-[#34C759] flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
-            <path fillRule="evenodd" d="M8.603 3.799A4.49 4.49 0 0112 2.25c1.357 0 2.573.6 3.397 1.549a4.49 4.49 0 013.498 1.307 4.491 4.491 0 011.307 3.497A4.49 4.49 0 0121.75 12a4.49 4.49 0 01-1.549 3.397 4.491 4.491 0 01-1.307 3.497 4.491 4.491 0 01-3.497 1.307A4.49 4.49 0 0112 21.75a4.49 4.49 0 01-3.397-1.549 4.49 4.49 0 01-3.498-1.306 4.491 4.491 0 01-1.307-3.498A4.49 4.49 0 012.25 12c0-1.357.6-2.573 1.549-3.397a4.49 4.49 0 011.307-3.497 4.49 4.49 0 013.497-1.307zm7.007 6.387a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clipRule="evenodd" />
-          </svg>
-        </div>
-
-        {/* Description */}
-        <p className="text-[#777777] text-xs leading-relaxed line-clamp-2 pr-1">
-          Premium {product.tag.toLowerCase()} product focusing on simplicity & usability.
-        </p>
-
-        {/* Statistics Row */}
-        <div className="flex items-center gap-3 mt-4">
-          <div className="flex items-center gap-1.5">
-            <svg className="w-3.5 h-3.5 text-[#777777]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
-            <span className="text-[#1A1A1A] font-semibold text-xs">312</span>
-          </div>
-          <div className="flex items-center gap-1.5">
-            <svg className="w-3.5 h-3.5 text-[#777777]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
-            <span className="text-[#1A1A1A] font-semibold text-xs">48</span>
-          </div>
-        </div>
-
-        {/* Action Button */}
-        <div className="mt-5 flex justify-end">
-          <button 
-            onClick={(e) => { e.stopPropagation(); isAdded ? removeFromCart(product.name) : addToCart(product); }}
-            className={`flex items-center justify-center px-4 py-1.5 border rounded-full font-semibold text-xs shadow-[0px_2px_8px_rgba(0,0,0,0.04)] hover:shadow-[0px_6px_16px_rgba(0,0,0,0.08)] active:scale-95 transition-all duration-200 ${isAdded ? 'bg-orange-500 border-orange-500 text-white hover:bg-orange-600' : 'bg-[#FFFFFF] border-[#EAEAEA] text-[#222222] hover:bg-[#FDFDFD]'}`}
-          >
-            {isAdded ? 'Added ✓' : 'Add'}
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-}
 
 const categories = [
   {
     icon: Gift,
-    title: 'Premium Collection',
-    subtitle: 'For Leaders & Key Clients',
+    title: 'Premium',
+    subtitle: '',
     description:
       'Luxury gifts curated for CXOs, leadership teams, business partners, and key clients.',
     features: [
@@ -198,12 +23,11 @@ const categories = [
     bg: 'from-orange-50 to-amber-50',
     iconBg: 'from-orange-500 to-orange-600',
     badge: 'Most Popular',
-    products: premiumProducts,
   },
   {
     icon: Briefcase,
-    title: 'Standard Collection',
-    subtitle: 'For Managers & Partners',
+    title: 'Standard',
+    subtitle: '',
     description:
       'Elegant gifting solutions for managers, associates, partners, and event participants.',
     features: [
@@ -216,12 +40,11 @@ const categories = [
     bg: 'from-slate-50 to-gray-50',
     iconBg: 'from-slate-700 to-slate-800',
     badge: 'Best Value',
-    products: standardProducts,
   },
   {
     icon: ShoppingBag,
-    title: 'Regular Collection',
-    subtitle: 'For Bulk & Events',
+    title: 'Regular',
+    subtitle: '',
     description:
       'Smart gifting solutions designed for employee engagement and bulk corporate requirements.',
     features: [
@@ -234,12 +57,11 @@ const categories = [
     bg: 'from-emerald-50 to-teal-50',
     iconBg: 'from-emerald-500 to-emerald-600',
     badge: 'Budget Friendly',
-    products: regularProducts,
   },
   {
     icon: Leaf,
-    title: 'Sustainable Collection',
-    subtitle: 'Eco-Friendly Options',
+    title: 'Sustainable',
+    subtitle: '',
     description:
       'Environmentally conscious gifting choices that reflect your commitment to sustainability.',
     features: [
@@ -252,9 +74,81 @@ const categories = [
     bg: 'from-violet-50 to-purple-50',
     iconBg: 'from-violet-500 to-purple-600',
     badge: 'Eco Friendly',
-    products: sustainableProducts,
   },
 ];
+
+function CategoryCard({ cat, onClick }: { cat: typeof categories[0], onClick: () => void }) {
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0, isHovered: false });
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    
+    const rotateX = ((y - centerY) / centerY) * -10; // Max 10 deg rotation
+    const rotateY = ((x - centerX) / centerX) * 10;
+    
+    setMousePos({ x: rotateX, y: rotateY, isHovered: true });
+  };
+
+  const handleMouseLeave = () => {
+    setMousePos({ x: 0, y: 0, isHovered: false });
+  };
+
+  const Icon = cat.icon;
+
+  return (
+    <div 
+      ref={cardRef}
+      style={{ perspective: '1200px' }}
+      className="relative cursor-pointer group"
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      onClick={onClick}
+    >
+      <div
+        style={{ 
+          transform: mousePos.isHovered 
+            ? `rotateX(${mousePos.x}deg) rotateY(${mousePos.y}deg) scale3d(1.02, 1.02, 1.02)` 
+            : 'rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)',
+          transformStyle: 'preserve-3d'
+        }}
+        className={`relative bg-gradient-to-br ${cat.bg} rounded-[28px] p-8 border border-gray-100 transition-transform duration-300 ease-out h-full shadow-[0_10px_30px_rgba(0,0,0,0.05)] group-hover:shadow-[0_30px_50px_rgba(0,0,0,0.12)]`}
+      >
+        <div style={{ transform: mousePos.isHovered ? 'translateZ(50px)' : 'translateZ(0)', transformStyle: 'preserve-3d' }} className="transition-transform duration-300 ease-out relative z-10 h-full flex flex-col">
+          <span className="absolute top-0 right-0 text-xs font-manrope font-bold px-3 py-1 rounded-full text-white shadow-md transition-transform duration-300" style={{ background: cat.accent, transform: mousePos.isHovered ? 'translateZ(40px) translateY(-5px) translateX(5px)' : 'translateZ(0)' }}>
+            {cat.badge}
+          </span>
+          <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${cat.iconBg} flex items-center justify-center mb-6 shadow-lg transition-transform duration-300`} style={{ transform: mousePos.isHovered ? 'translateZ(60px) scale(1.1)' : 'translateZ(0)' }}>
+            <Icon className="w-7 h-7 text-white" />
+          </div>
+          <p className="font-dm text-xs font-semibold text-slate-400 uppercase tracking-widest mb-2 transition-transform duration-300" style={{ transform: mousePos.isHovered ? 'translateZ(30px)' : 'translateZ(0)' }}>
+            {cat.subtitle}
+          </p>
+          <h3 className="font-sora font-extrabold text-2xl text-slate-900 mb-3 transition-transform duration-300" style={{ transform: mousePos.isHovered ? 'translateZ(40px)' : 'translateZ(0)' }}>
+            {cat.title}
+          </h3>
+          <p className="font-dm text-slate-500 text-sm leading-relaxed mb-6 flex-1 transition-transform duration-300" style={{ transform: mousePos.isHovered ? 'translateZ(20px)' : 'translateZ(0)' }}>
+            {cat.description}
+          </p>
+          <ul className="space-y-2.5 mt-auto">
+            {cat.features.map((f, i) => (
+              <li key={f} className="flex items-center gap-2.5 transition-transform duration-300" style={{ transform: mousePos.isHovered ? `translateZ(${20 + (i * 5)}px)` : 'translateZ(0)' }}>
+                <CheckCircle2 className="w-4 h-4 flex-shrink-0" style={{ color: cat.accent }} />
+                <span className="font-dm text-sm font-medium text-slate-700">{f}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="absolute -bottom-10 -right-10 w-40 h-40 rounded-full opacity-10 pointer-events-none transition-transform duration-500 ease-out" style={{ background: cat.accent, transform: mousePos.isHovered ? 'translateZ(-30px) scale(1.2)' : 'translateZ(0) scale(1)' }} />
+      </div>
+    </div>
+  );
+}
 
 export default function Services() {
   const [selectedCategory, setSelectedCategory] = useState<typeof categories[0] | null>(null);
@@ -274,13 +168,37 @@ export default function Services() {
       const cat = categories.find((c) => c.title === e.detail);
       if (cat) setSelectedCategory(cat);
     };
+    const handleCloseModals = () => {
+      setSelectedCategory(null);
+    };
+    
     window.addEventListener('open-category', handleOpenCategory);
-    return () => window.removeEventListener('open-category', handleOpenCategory);
+    window.addEventListener('close-modals', handleCloseModals);
+    return () => {
+      window.removeEventListener('open-category', handleOpenCategory);
+      window.removeEventListener('close-modals', handleCloseModals);
+    };
   }, []);
 
   return (
-    <section id="collections" className="py-24 bg-white">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+    <>
+      <style>{`
+        @keyframes gradient-bg {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+        .animate-gradient-bg {
+          animation: gradient-bg 15s ease infinite;
+          background-size: 400% 400%;
+        }
+      `}</style>
+      <section id="collections" className="py-24 relative overflow-hidden animate-gradient-bg" style={{ backgroundImage: 'linear-gradient(-45deg, #ffffff, #f8fafc, #f1f5f9, #ffffff)' }}>
+      {/* Animated Background Orbs */}
+      <div className="absolute top-[20%] left-[-10%] w-[600px] h-[600px] bg-orange-500/5 rounded-full blur-[120px] animate-pulse pointer-events-none" />
+      <div className="absolute bottom-[10%] right-[-5%] w-[500px] h-[500px] bg-emerald-500/5 rounded-full blur-[100px] animate-pulse pointer-events-none" style={{ animationDelay: '2s' }} />
+
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 bg-orange-50 border border-orange-100 rounded-full px-4 py-2 mb-5">
@@ -296,107 +214,49 @@ export default function Services() {
 
         {/* Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {categories.map((cat) => {
-            const Icon = cat.icon;
-            return (
-              <div
-                key={cat.title}
-                className={`relative bg-gradient-to-br ${cat.bg} rounded-[28px] p-8 border border-gray-100 card-hover cursor-pointer group overflow-hidden`}
-              >
-                {/* Badge */}
-                <span
-                  className="absolute top-6 right-6 text-xs font-manrope font-bold px-3 py-1 rounded-full text-white"
-                  style={{ background: cat.accent }}
-                >
-                  {cat.badge}
-                </span>
-
-                {/* Icon */}
-                <div
-                  className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${cat.iconBg} flex items-center justify-center mb-6 shadow-lg`}
-                >
-                  <Icon className="w-7 h-7 text-white" />
-                </div>
-
-                {/* Content */}
-                <p className="font-dm text-xs font-semibold text-slate-400 uppercase tracking-widest mb-2">
-                  {cat.subtitle}
-                </p>
-                <h3 className="font-sora font-extrabold text-2xl text-slate-900 mb-3">
-                  {cat.title}
-                </h3>
-                <p className="font-dm text-slate-500 text-sm leading-relaxed mb-6">
-                  {cat.description}
-                </p>
-
-                {/* Features */}
-                <ul className="space-y-2.5">
-                  {cat.features.map((f) => (
-                    <li key={f} className="flex items-center gap-2.5">
-                      <CheckCircle2 className="w-4 h-4 flex-shrink-0" style={{ color: cat.accent }} />
-                      <span className="font-dm text-sm font-medium text-slate-700">{f}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                {/* View All Products Button */}
-                <button
-                  onClick={(e) => { e.stopPropagation(); setSelectedCategory(cat); }}
-                  className="mt-8 w-full py-3.5 px-5 bg-white/60 hover:bg-white rounded-2xl flex items-center justify-between shadow-[0_4px_12px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-300 group/btn relative z-10"
-                >
-                  <span className="font-manrope font-bold text-sm text-slate-800">View All Products</span>
-                  <div className="w-8 h-8 rounded-full flex items-center justify-center bg-slate-50 group-hover/btn:bg-slate-900 group-hover/btn:text-white transition-colors duration-300">
-                    <ArrowRight className="w-4 h-4" />
-                  </div>
-                </button>
-
-                {/* Background decoration */}
-                <div
-                  className="absolute -bottom-10 -right-10 w-32 h-32 rounded-full opacity-10"
-                  style={{ background: cat.accent }}
-                />
-              </div>
-            );
-          })}
+          {categories.map((cat) => (
+            <CategoryCard 
+              key={cat.title} 
+              cat={cat} 
+              onClick={() => {
+                window.dispatchEvent(new CustomEvent('open-category', { detail: cat.title }));
+              }} 
+            />
+          ))}
         </div>
+        </div>
+      </section>
 
-        {/* Popup Modal */}
-        {selectedCategory && (
-          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 md:p-12">
+      {/* Popup Modal */}
+      {selectedCategory && (
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 sm:p-6 md:p-12">
             {/* Backdrop */}
             <div 
-              className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity" 
+              className="absolute inset-0 bg-slate-900/40 backdrop-blur-md transition-opacity" 
               onClick={() => setSelectedCategory(null)} 
             />
             
             {/* Modal Content */}
-            <div className="relative w-full max-w-6xl max-h-[90vh] bg-[#F5F5F5] rounded-[32px] shadow-2xl flex flex-col overflow-hidden animate-fade-in-up border border-[#EAEAEA]">
-              {/* Modal Header */}
-              <div className="px-6 md:px-8 py-6 bg-white border-b border-[#EAEAEA] flex items-center justify-between z-10 shrink-0">
-                <div>
-                  <h3 className="font-sora font-extrabold text-2xl text-slate-900">{selectedCategory.title}</h3>
-                  <p className="font-dm text-sm text-slate-500 mt-1">{selectedCategory.products.length} Products Available</p>
-                </div>
-                <button 
-                  onClick={() => setSelectedCategory(null)} 
-                  className="p-2.5 rounded-full bg-slate-50 hover:bg-slate-100 text-slate-500 hover:text-slate-900 transition-colors"
-                >
-                  <X className="w-6 h-6" />
-                </button>
-              </div>
+            <div className="relative w-full max-w-7xl max-h-[95vh] rounded-[32px] shadow-[0_20px_80px_rgba(0,0,0,0.2)] flex flex-col overflow-hidden animate-fade-in-up bg-white/40 backdrop-blur-3xl border border-white/60">
+              
+              {/* Floating Close Button */}
+              <button 
+                onClick={() => setSelectedCategory(null)} 
+                className="absolute top-4 right-4 md:top-6 md:right-6 z-50 p-2.5 rounded-full bg-white/50 hover:bg-white/80 text-slate-800 backdrop-blur-md border border-white/50 shadow-sm transition-colors"
+              >
+                <X className="w-6 h-6" />
+              </button>
               
               {/* Modal Body (Scrollable) */}
-              <div className="p-6 md:p-8 overflow-y-auto custom-scrollbar">
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                  {selectedCategory.products.map((p) => (
-                    <ProductCard key={p.name} product={p} />
-                  ))}
-                </div>
+              <div className="overflow-y-auto custom-scrollbar w-full h-full">
+                {selectedCategory.title === 'Premium' && <PremiumCollection />}
+                {selectedCategory.title === 'Standard' && <StandardCollection />}
+                {selectedCategory.title === 'Regular' && <RegularCollection />}
+                {selectedCategory.title === 'Sustainable' && <SustainableCollection />}
               </div>
             </div>
           </div>
         )}
-      </div>
-    </section>
+    </>
   );
 }

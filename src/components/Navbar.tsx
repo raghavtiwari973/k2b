@@ -19,17 +19,18 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'bg-white shadow-lg border-b border-gray-100' : 'bg-white/80 backdrop-blur-md'
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+    <div className="fixed top-4 left-0 right-0 z-50 flex justify-center px-4 md:px-8 pointer-events-none">
+      <nav
+        className={`pointer-events-auto w-full max-w-7xl transition-all duration-500 ease-in-out ${
+          scrolled ? '-translate-y-[150%] opacity-0 pointer-events-none' : 'translate-y-0 opacity-100'
+        }`}
+      >
+        <div className="bg-white/60 backdrop-blur-2xl border border-white/50 shadow-[0_8px_32px_rgba(0,0,0,0.1)] rounded-full px-6 lg:px-8">
         <div className="flex items-center justify-between h-18 py-4">
           {/* Logo */}
           <a href="#home" className="flex items-center gap-3 group">
             <div className="flex flex-col leading-none">
-              <span className="font-sora font-800 text-base font-extrabold text-slate-900 tracking-tight">K2B Gifting</span>
+              <span className="font-sora font-800 text-base font-extrabold text-slate-900 tracking-tight">Key2Brand</span>
               <span className="font-dm text-xs text-orange-500 font-semibold tracking-wide">SOLUTION</span>
             </div>
           </a>
@@ -50,11 +51,8 @@ export default function Navbar() {
 
           {/* CTA Buttons */}
           <div className="hidden md:flex items-center gap-3">
-            <a href="#contact" className="btn-secondary text-sm py-2.5 px-5">
+            <a href="#contact" className="bg-gradient-to-r from-[#FF7A00] to-[#EC4899] text-white font-bold text-sm py-2.5 px-6 rounded-full shadow-md hover:shadow-[0_4px_15px_rgba(255,122,0,0.4)] hover:scale-105 transition-all duration-300">
               Contact Us
-            </a>
-            <a href="#collections" className="btn-primary text-sm py-2.5 px-5">
-              Explore Collections
             </a>
           </div>
 
@@ -70,7 +68,7 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {menuOpen && (
-        <div className="md:hidden bg-white border-t border-gray-100 px-6 py-4 shadow-xl">
+        <div className="md:hidden mt-2 bg-white/70 backdrop-blur-2xl border border-white/50 rounded-[24px] px-6 py-5 shadow-xl">
           <div className="flex flex-col gap-4">
             {navLinks.map((link) => (
               <a
@@ -82,13 +80,13 @@ export default function Navbar() {
                 {link.label}
               </a>
             ))}
-            <div className="flex flex-col gap-3 pt-2 border-t border-gray-100">
-              <a href="#contact" className="btn-secondary text-sm text-center">Contact Us</a>
-              <a href="#collections" className="btn-primary text-sm text-center">Explore Collections</a>
+            <div className="flex flex-col gap-3 pt-4 mt-2 border-t border-slate-200/60">
+              <a href="#contact" onClick={() => setMenuOpen(false)} className="bg-gradient-to-r from-[#FF7A00] to-[#EC4899] text-white font-bold text-sm text-center py-3 rounded-full shadow-md hover:shadow-[0_4px_15px_rgba(255,122,0,0.4)] transition-all duration-300">Contact Us</a>
             </div>
           </div>
         </div>
       )}
-    </nav>
+      </nav>
+    </div>
   );
 }

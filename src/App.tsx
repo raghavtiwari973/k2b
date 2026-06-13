@@ -1,14 +1,13 @@
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Services from './components/Services';
-import PremiumCollection from './components/PremiumCollection';
-import StandardCollection from './components/StandardCollection';
-import RegularCollection from './components/RegularCollection';
 import Customization from './components/Customization';
 import WhyK2B from './components/WhyK2B';
 import Testimonials from './components/Testimonials';
 import CTA from './components/CTA';
 import { CartProvider } from './components/CartContext';
+import FloatingQuoteButton from './components/FloatingQuoteButton';
+import Chatbot from './components/Chatbot';
 
 export default function App() {
   return (
@@ -18,14 +17,13 @@ export default function App() {
         <main>
           <Hero />
           <Services />
-          <PremiumCollection />
-          <StandardCollection />
-          <RegularCollection />
           <Customization />
           <WhyK2B />
           <Testimonials />
           <CTA />
         </main>
+        <Chatbot />
+            <FloatingQuoteButton />
       </div>
     </CartProvider>
   );

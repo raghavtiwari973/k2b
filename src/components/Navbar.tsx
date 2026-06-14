@@ -31,7 +31,7 @@ export default function Navbar() {
           <a href="#home" className="flex items-center gap-3 group">
             <div className="flex flex-col leading-none">
               <span className="font-sora font-800 text-base font-extrabold text-slate-900 tracking-tight">Key2Brand</span>
-              <span className="font-dm text-xs text-orange-500 font-semibold tracking-wide">SOLUTION</span>
+              <span className="font-dm text-xs text-orange-500 font-semibold tracking-wide">360° SOLUTION</span>
             </div>
           </a>
 

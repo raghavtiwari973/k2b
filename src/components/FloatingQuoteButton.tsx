@@ -16,7 +16,7 @@ export default function FloatingQuoteButton() {
   return (
     <button
       onClick={handleClick}
-      className="fixed bottom-24 right-6 md:bottom-28 md:right-8 z-[100000] bg-slate-900 text-white p-4 rounded-full shadow-[0_10px_30px_rgba(0,0,0,0.3)] hover:scale-110 hover:bg-slate-800 transition-all duration-300 flex items-center justify-center group animate-fade-in-up"
+      className="fixed bottom-44 right-6 md:bottom-48 md:right-8 z-[100000] bg-slate-900 text-white p-4 rounded-full shadow-[0_10px_30px_rgba(0,0,0,0.3)] hover:scale-110 hover:bg-slate-800 transition-all duration-300 flex items-center justify-center group animate-fade-in-up"
       title="View Selected Items"
     >
       <div className="relative">

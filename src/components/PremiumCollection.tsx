@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Crown, Briefcase, Headphones, Leaf, Gift, Sparkles, Star, X, ShoppingCart } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { useCart } from './CartContext';
 
 const premiumCards = [
@@ -11,26 +12,26 @@ const premiumCards = [
 
 const premiumProducts: Record<string, {name: string, image: string}[]> = {
   'Executive Desk': [
-    { name: 'Premium Wooden Desk Organizers', image: 'https://images.unsplash.com/photo-1520085601670-ee14aa5fa3e8?w=500&q=80' },
-    { name: 'Personalized Executive Name Lamps', image: 'https://images.unsplash.com/photo-1517999144091-3d9dca6d1e43?w=500&q=80' },
-    { name: 'Luxury LED Desk Clocks', image: 'https://images.unsplash.com/photo-1622445275463-afa2ab738c34?w=500&q=80' },
-    { name: 'Premium Table Décor Accessories', image: 'https://images.unsplash.com/photo-1520085601670-ee14aa5fa3e8?w=500&q=80' },
-    { name: 'Premium Leatherette Organizer', image: 'https://images.unsplash.com/photo-1531346878377-a541fa4cb5e3?w=500&q=80' },
-    { name: 'Executive Notebook & Pen Set', image: 'https://images.unsplash.com/photo-1585776245991-cf89dd7fc73a?w=500&q=80' },
-    { name: 'Smart Desk Lamp', image: 'https://images.unsplash.com/photo-1517999144091-3d9dca6d1e43?w=500&q=80' },
+    { name: 'Premium Wooden Desk Organizers', image: 'https://i.pinimg.com/1200x/c0/d9/7a/c0d97a46b2e2f2c76939e840752656e4.jpg' },
+    { name: 'Personalized Executive Name Lamps', image: 'https://i.pinimg.com/1200x/e9/41/a7/e941a78a18baad0b3f975a9414e8b783.jpg' },
+    { name: 'Luxury LED Desk Clocks', image: 'https://i.pinimg.com/736x/6c/02/28/6c0228b14206d2c6f04c43305d60e2f1.jpg' },
+    { name: 'Premium Table Décor Accessories', image: 'https://i.pinimg.com/1200x/a9/0f/c5/a90fc571f4a705ac34b82b3b0d91274c.jpg' },
+    { name: 'Premium Leatherette Organizer', image: 'https://i.pinimg.com/1200x/37/0c/88/370c881efd5094e97e69b80ba5a92bb8.jpg' },
+    { name: 'Executive Notebook & Pen Set', image: 'https://i.pinimg.com/1200x/0a/25/41/0a2541d1cd4de5362a4816cf7ecd88f1.jpg' },
+    { name: 'Smart Desk Lamp', image: 'https://i.pinimg.com/736x/00/5c/42/005c4240fb4fecc8440b2973c27c6677.jpg' },
   ],
   'Technology': [
-    { name: 'Premium Metal USB Drives', image: 'https://images.unsplash.com/photo-1614944983059-e9eb7b3fcfe2?w=500&q=80' },
-    { name: 'Wireless Charging Stations', image: 'https://images.unsplash.com/photo-1622445275463-afa2ab738c34?w=500&q=80' },
-    { name: 'Executive Power Banks', image: 'https://images.unsplash.com/photo-1585338107529-13afc5f02586?w=500&q=80' },
-    { name: 'Wireless Charging Dock', image: 'https://images.unsplash.com/photo-1622445275463-afa2ab738c34?w=500&q=80' },
-    { name: 'Bluetooth Speakers', image: 'https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=500&q=80' },
+    { name: 'Premium Metal USB Drives', image: 'https://i.pinimg.com/736x/8b/7e/2d/8b7e2d2b2dd170ef334bbfc4bef0eb5b.jpg' },
+    { name: 'Wireless Charging Stations', image: 'https://i.pinimg.com/736x/7e/b9/fe/7eb9fe3f0f4ba362cf381acd15694288.jpg' },
+    { name: 'Executive Power Banks', image: 'https://i.pinimg.com/736x/f4/53/fa/f453fa6579dcb16fe49df35f5dc84f48.jpg' },
+    { name: 'Wireless Charging Dock', image: 'https://i.pinimg.com/736x/95/a5/7e/95a57ee05c39ba2ceec4ba1857093cfd.jpg' },
+    { name: 'Bluetooth Speakers', image: 'https://i.pinimg.com/736x/1f/44/f0/1f44f0385ebb66764e22a868467dc09d.jpg' },
   ],
   'Sustainable Luxury': [
-    { name: 'Bamboo Bottle Gift Sets', image: 'https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=500&q=80' },
-    { name: 'Eco-Friendly Executive Kits', image: 'https://images.unsplash.com/photo-1544816155-12df9643f363?w=500&q=80' },
-    { name: 'Premium Wooden Gift Sets', image: 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=500&q=80' },
-    { name: 'Sustainable Corporate Gift Boxes', image: 'https://images.unsplash.com/photo-1513885535751-8b9238bd345a?w=500&q=80' },
+    { name: 'Bamboo Bottle Gift Sets', image: 'https://i.pinimg.com/736x/c3/f8/b8/c3f8b8637c15b66f052c80a25b6f2541.jpg' },
+    { name: 'Eco-Friendly Executive Kits', image: 'https://i.pinimg.com/236x/d0/35/cc/d035cc4cfe2eb85dae597161c373f938.jpg' },
+    { name: 'Premium Wooden Gift Sets', image: 'https://i.pinimg.com/1200x/9c/64/29/9c6429d25b3ca765e1492fcc0f9e74a6.jpg' },
+    { name: 'Sustainable Corporate Gift Boxes', image: 'https://i.pinimg.com/1200x/98/6d/9c/986d9cf55035a660581a30a138b86862.jpg' },
   ],
   'Curated Hampers': [
     { name: 'Executive Workstation Hamper', image: 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=500&q=80' },
@@ -114,7 +115,13 @@ export default function PremiumCollection() {
         <Sparkles className="w-24 h-24 text-[#D97706]" strokeWidth={1} />
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10 flex flex-col items-center animate-fade-in-up">
+      <motion.div 
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+        className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10 flex flex-col items-center"
+      >
         {/* Section Header */}
         <div className="text-center mb-16 flex flex-col items-center">
           <h3 className="text-[#D97706] text-[20px] lg:text-[26px] font-medium mb-4 tracking-wide">
@@ -133,7 +140,12 @@ export default function PremiumCollection() {
           {premiumCards.map((card, i) => {
             const Icon = card.icon;
             return (
-              <div key={card.title} className="animate-fade-in-up" style={{ animationDelay: `${i * 0.1}s` }}>
+              <motion.div 
+                initial={{ opacity: 0, y: 30 }} 
+                whileInView={{ opacity: 1, y: 0 }} 
+                transition={{ duration: 0.5, delay: i * 0.1 }} 
+                key={card.title}
+              >
                 <div className="glass-premium-card p-8 h-full flex flex-col items-center text-center cursor-pointer group" onClick={() => setSelectedSubCategory(card)}>
                   <div className="premium-icon-wrap w-16 h-16 rounded-full flex items-center justify-center mb-6 shadow-md transition-transform duration-300 group-hover:scale-110">
                     <Icon className="w-7 h-7 text-white" />
@@ -141,7 +153,7 @@ export default function PremiumCollection() {
                   <h4 className="text-[#7C2D12] text-xl font-bold mb-3">{card.title}</h4>
                   <p className="text-[#3F3F3F] text-sm leading-relaxed">{card.desc}</p>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
         </div>
@@ -155,7 +167,7 @@ export default function PremiumCollection() {
             They Inspire Greatness.
           </p>
         </div>
-      </div>
+      </motion.div>
 
       {/* Products Modal */}
       {selectedSubCategory && (

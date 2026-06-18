@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { PenTool, Tag, Gift, Smartphone, Package, Box, Archive, X, ShoppingCart } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { useCart } from './CartContext';
 
 const regularCards = [
@@ -111,7 +112,13 @@ export default function RegularCollection() {
         <Box className="w-24 h-24 text-[#10B981]" strokeWidth={1} />
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10 flex flex-col items-center animate-fade-in-up">
+      <motion.div 
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+        className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10 flex flex-col items-center"
+      >
         {/* Section Header */}
         <div className="text-center mb-16 flex flex-col items-center">
           <h3 className="text-[#10B981] text-[20px] lg:text-[26px] font-medium mb-4 tracking-wide">
@@ -130,7 +137,12 @@ export default function RegularCollection() {
           {regularCards.map((card, i) => {
             const Icon = card.icon;
             return (
-              <div key={card.title} className="animate-fade-in-up" style={{ animationDelay: `${i * 0.1}s` }}>
+              <motion.div 
+                initial={{ opacity: 0, y: 30 }} 
+                whileInView={{ opacity: 1, y: 0 }} 
+                transition={{ duration: 0.5, delay: i * 0.1 }} 
+                key={card.title}
+              >
                 <div className="glass-regular-card p-8 h-full flex flex-col items-center text-center cursor-pointer group" onClick={() => setSelectedSubCategory(card)}>
                   <div className="regular-icon-wrap w-16 h-16 rounded-full flex items-center justify-center mb-6 shadow-md transition-transform duration-300 group-hover:scale-110">
                     <Icon className="w-7 h-7 text-white" />
@@ -138,7 +150,7 @@ export default function RegularCollection() {
                   <h4 className="text-[#064E3B] text-xl font-bold mb-3">{card.title}</h4>
                   <p className="text-[#3F3F3F] text-sm leading-relaxed">{card.desc}</p>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
         </div>
@@ -152,7 +164,7 @@ export default function RegularCollection() {
             Scale With You.
           </p>
         </div>
-      </div>
+      </motion.div>
 
       {/* Products Modal */}
       {selectedSubCategory && (

@@ -13,28 +13,28 @@ const regularCards = [
 const regularProducts: Record<string, {name: string, image: string}[]> = {
   'Office Essentials': [
     { name: 'Branded Pen Sets', image: 'https://images.unsplash.com/photo-1585336261022-680e295ce3fe?w=500&q=80' },
-    { name: 'Notebooks', image: 'https://images.unsplash.com/photo-1585776245991-cf89dd7fc73a?w=500&q=80' },
-    { name: 'Diaries', image: 'https://images.unsplash.com/photo-1531346878377-a541fa4cb5e3?w=500&q=80' },
-    { name: 'Desk Calendars', image: 'https://images.unsplash.com/photo-1585776245991-cf89dd7fc73a?w=500&q=80' },
-    { name: 'Sticky Notes', image: 'https://images.unsplash.com/photo-1531346878377-a541fa4cb5e3?w=500&q=80' },
+    { name: 'Notebooks', image: 'https://i.pinimg.com/736x/c9/d0/f0/c9d0f03c10197ba89ae6da57e03004d7.jpg' },
+    { name: 'Diaries', image: 'https://i.pinimg.com/736x/83/f2/9f/83f29f0ba1c3955bfdbb4c2e6c1b5509.jpg' },
+    { name: 'Desk Calendars', image: 'https://i.pinimg.com/736x/7b/bb/ae/7bbbae50aa88c1864193a4cdd7226d84.jpg' },
+    { name: 'Sticky Notes', image: 'https://i.pinimg.com/736x/6e/c7/1b/6ec71b543f7fa90c408aecb5889a42e9.jpg' },
   ],
   'Event Giveaways': [
     { name: 'Conference Kits', image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500&q=80' },
-    { name: 'Promotional Merchandise', image: 'https://images.unsplash.com/photo-1544816155-12df9643f363?w=500&q=80' },
+    { name: 'Promotional Merchandise', image: 'https://i.pinimg.com/736x/78/87/f5/7887f5d56647313252ccb7565378c405.jpg' },
     { name: 'Training Program Gifts', image: 'https://images.unsplash.com/photo-1585776245991-cf89dd7fc73a?w=500&q=80' },
-    { name: 'Lanyards', image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500&q=80' },
+    { name: 'Lanyards', image: 'https://i.pinimg.com/1200x/0f/2c/4b/0f2c4bb8097cb247b5e9392b31983c55.jpg' },
   ],
   'Joining Kits': [
     { name: 'Employee Welcome Kits', image: 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=500&q=80' },
     { name: 'Employee Joining Kits', image: 'https://images.unsplash.com/photo-1513885535751-8b9238bd345a?w=500&q=80' },
-    { name: 'Coffee Mugs', image: 'https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?w=500&q=80' },
-    { name: 'Keychains', image: 'https://images.unsplash.com/photo-1585338107529-13afc5f02586?w=500&q=80' },
+    { name: 'Coffee Mugs', image: 'https://i.pinimg.com/736x/78/fc/6c/78fc6cc72efbcec6fd4471a2f5adc5af.jpg' },
+    { name: 'Keychains', image: 'https://i.pinimg.com/1200x/bf/36/12/bf36129637a8bdefb955407b4ea0680a.jpg' },
   ],
   'Desk Utilities': [
-    { name: 'Mouse Pads', image: 'https://images.unsplash.com/photo-1505843490538-5133c6c7d0e1?w=500&q=80' },
-    { name: 'Mobile Holders', image: 'https://images.unsplash.com/photo-1527443195645-1133f7f28990?w=500&q=80' },
-    { name: 'USB Drives', image: 'https://images.unsplash.com/photo-1614944983059-e9eb7b3fcfe2?w=500&q=80' },
-    { name: 'Desk Utilities', image: 'https://images.unsplash.com/photo-1520085601670-ee14aa5fa3e8?w=500&q=80' },
+    { name: 'Mouse Pads', image: 'https://i.pinimg.com/736x/2b/dc/13/2bdc1376749b4e23a6eaf707a3375261.jpg' },
+    { name: 'Mobile Holders', image: 'https://i.pinimg.com/736x/6a/48/cc/6a48cc09e3eceac5cfd5af77bdfbf5db.jpg' },
+    { name: 'USB Drives', image: 'https://i.pinimg.com/736x/b1/7f/b2/b17fb2d41351f6f4d02d3b7296d49b6c.jpg' },
+    { name: 'Desk Utilities', image: 'https://i.pinimg.com/736x/43/ba/bd/43babd24b1371756bac0f02515b8876f.jpg' },
   ]
 };
 

@@ -136,13 +136,13 @@ export default function WhyK2B() {
       <div className="max-w-[1400px] mx-auto px-6 lg:px-8 relative z-10">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-20 lg:mb-24 transition-transform duration-300 ease-out" style={{ transform: `translate(${mousePos.x * 0.5}px, ${mousePos.y * 0.5}px)` }}>
-          <div className="inline-flex items-center gap-2 bg-white rounded-full px-5 py-2 shadow-sm border border-gray-100 mb-6">
+          {/* <div className="inline-flex items-center gap-2 bg-white rounded-full px-5 py-2 shadow-sm border border-gray-100 mb-6">
             <Gift className="w-4 h-4 text-[#FF7A00]" />
             <span className="font-manrope text-sm font-bold uppercase tracking-widest text-slate-700">Why Choose Us</span>
-          </div>
+          </div> */}
           <h2 className="font-sora font-black text-5xl md:text-6xl text-[#0B1324] mb-6 tracking-tight">
-            Enterprise Ready. <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF7A00] to-[#D6A354]">Boutique Care.</span>
+            Enterprise Ready <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF7A00] to-[#D6A354]">Boutique Care</span>
           </h2>
           <p className="font-dm text-xl text-[#5E6B84] max-w-2xl mx-auto">
             We provide scalable, pan-India corporate gifting solutions tailored with extreme precision.
@@ -174,7 +174,7 @@ export default function WhyK2B() {
                 <p className="font-sora font-black text-5xl text-white mb-2"><AnimatedCounter end={100} />%</p>
                 <p className="font-manrope font-bold text-xs uppercase tracking-widest text-orange-200 mb-4">Brand Aligned</p>
                 <h3 className="font-sora font-bold text-xl text-white mb-2">Bespoke Design</h3>
-                <p className="font-dm text-white/80 text-sm leading-relaxed">Full customization — logos, packaging, and personalized messaging.</p>
+                <p className="font-dm text-white/80 text-sm leading-relaxed">Full customization — logos, packaging and personalized messaging.</p>
               </div>
             </div>
           </BentoCard>

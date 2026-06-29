@@ -12,7 +12,7 @@ const categories = [
     title: 'Premium',
     subtitle: '',
     description:
-      'Luxury gifts curated for CXOs, leadership teams, business partners, and key clients.',
+      'Luxury gifts curated for CXOs, leadership teams, business partners and key clients.',
     features: [
       'Executive Desk Collection',
       'Technology Collection',
@@ -29,7 +29,7 @@ const categories = [
     title: 'Standard',
     subtitle: '',
     description:
-      'Elegant gifting solutions for managers, associates, partners, and event participants.',
+      'Elegant gifting solutions for managers, associates, partners and event participants.',
     features: [
       'Workspace Essentials',
       'Technology Essentials',
@@ -201,9 +201,9 @@ export default function Services() {
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 bg-orange-50 border border-orange-100 rounded-full px-4 py-2 mb-5">
+          {/* <div className="inline-flex items-center gap-2 bg-orange-50 border border-orange-100 rounded-full px-4 py-2 mb-5">
             <span className="font-manrope text-sm font-semibold text-orange-600">Our Collections</span>
-          </div>
+          </div> */}
           <h2 className="font-sora font-extrabold text-4xl lg:text-5xl text-slate-900 mb-4">
             Our Gifting Categories
           </h2>

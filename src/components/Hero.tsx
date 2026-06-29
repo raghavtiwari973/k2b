@@ -71,7 +71,7 @@ export default function Hero() {
               </h1>
             
               <p className="font-dm text-base md:text-lg lg:text-xl text-slate-500 max-w-xl leading-relaxed mb-8 lg:mb-10">
-                Premium curated collections designed to appreciate leaders, delight clients, and build lasting relationships across India.
+                Premium curated collections designed to appreciate leaders, delight clients and build lasting relationships across India.
               </p>
             
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-5 mb-10 lg:mb-12">

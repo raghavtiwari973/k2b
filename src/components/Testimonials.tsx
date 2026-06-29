@@ -19,7 +19,7 @@ const testimonials = [
     initials: 'PN',
     color: 'from-blue-500 to-blue-600',
     review:
-      "We partnered with K2B for our client appreciation event and the results were phenomenal. The custom branding was flawless, and every client specifically called out the premium feel of the gifts. Highly professional team.",
+      "We partnered with K2B for our client appreciation event and the results were phenomenal. The custom branding was flawless and every client specifically called out the premium feel of the gifts. Highly professional team.",
     tags: ['Branding Excellence', 'Professional Service'],
   },
   {
@@ -29,7 +29,7 @@ const testimonials = [
     initials: 'AM',
     color: 'from-emerald-500 to-emerald-600',
     review:
-      "K2B's eco-friendly collection for our Diwali gifting was a massive hit. The sustainable packaging aligned perfectly with our brand values, and delivery across 15 cities was smooth and on time. Outstanding service!",
+      "K2B's eco-friendly collection for our Diwali gifting was a massive hit. The sustainable packaging aligned perfectly with our brand values and delivery across 15 cities was smooth and on time. Outstanding service!",
     tags: ['Eco-Friendly', 'Pan India Delivery'],
   },
 ];
@@ -216,12 +216,12 @@ export default function Testimonials() {
       <div className="max-w-[1400px] mx-auto px-6 lg:px-8 relative z-10">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-20 lg:mb-24 transition-transform duration-300 ease-out" style={{ transform: `translate(${mousePos.x * 0.5}px, ${mousePos.y * 0.5}px)` }}>
-          <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/5 backdrop-blur-md border border-white/10 mb-6">
+          {/* <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/5 backdrop-blur-md border border-white/10 mb-6">
             <Sparkles className="w-4 h-4 text-[#D6A354]" />
             <span className="font-manrope text-xs font-bold uppercase tracking-[0.2em] text-white/80">Client Stories</span>
-          </div>
+          </div> */}
           <h2 className="font-sora font-black text-5xl md:text-6xl text-white mb-6 tracking-tight">
-            Stories of <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF7A00] to-[#D6A354]">Delight.</span>
+            Stories of <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF7A00] to-[#D6A354]">Delight</span>
           </h2>
           <p className="font-dm text-xl text-[#5E6B84] max-w-2xl mx-auto">
             Hear directly from the organizations that trust K2B to create unforgettable corporate gifting experiences.

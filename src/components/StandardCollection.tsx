@@ -129,7 +129,7 @@ export default function StandardCollection() {
             Standard Corporate Gifting
           </h2>
           <p className="text-[#3F3F3F] text-[16px] lg:text-[18px] leading-[1.8] max-w-[700px]">
-            Thoughtfully designed for managers, associates, and event participants. Functional gifts that make a lasting impression in every workplace setting.
+            Thoughtfully designed for managers, associates and event participants. Functional gifts that make a lasting impression in every workplace setting.
           </p>
         </div>
 

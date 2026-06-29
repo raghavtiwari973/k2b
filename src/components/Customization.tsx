@@ -231,10 +231,10 @@ export default function Customization() {
       <div className="max-w-[1400px] mx-auto px-6 lg:px-8 relative z-10">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-24 transition-transform duration-300 ease-out" style={{ transform: `translate(${mousePos.x * 0.5}px, ${mousePos.y * 0.5}px)` }}>
-          <div className="inline-flex items-center gap-2 bg-white/5 backdrop-blur-md rounded-full px-5 py-2 shadow-sm border border-white/10 mb-6">
+          {/* <div className="inline-flex items-center gap-2 bg-white/5 backdrop-blur-md rounded-full px-5 py-2 shadow-sm border border-white/10 mb-6">
             <Sparkles className="w-4 h-4 text-[#D6A354]" />
             <span className="font-manrope text-sm font-bold uppercase tracking-widest text-white/80">The Art of Gifting</span>
-          </div>
+          </div> */}
           <h2 className="font-sora font-black text-5xl md:text-6xl text-white mb-6 tracking-tight">
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF7A00] via-[#EC4899] to-[#D6A354]">Personalization</span>
           </h2>

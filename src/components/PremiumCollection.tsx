@@ -4,46 +4,82 @@ import { motion } from 'framer-motion';
 import { useCart } from './CartContext';
 
 const premiumCards = [
+  { title: 'Luxury Watches', desc: 'Elegant timepieces from world-renowned brands', icon: Crown },
+  { title: 'Premium Eyewear', desc: 'Sophisticated frames from iconic fashion houses', icon: Sparkles },
   { title: 'Executive Desk', desc: 'Premium desk accessories for top leadership', icon: Briefcase },
   { title: 'Technology', desc: 'Cutting-edge tech gifts for modern executives', icon: Headphones },
   { title: 'Sustainable Luxury', desc: 'Eco-conscious premium gifting solutions', icon: Leaf },
   { title: 'Curated Hampers', desc: 'Bespoke hampers crafted with finest products', icon: Gift },
 ];
 
-const premiumProducts: Record<string, {name: string, image: string}[]> = {
+type Product = {
+  name: string;
+  images: string[]; // First image is the main one
+};
+
+const premiumProducts: Record<string, Product[]> = {
+  'Luxury Watches': [
+    { 
+      name: 'Ethos: The Connoisseur\'s Collection', 
+      images: ['/8.jpg ', '/9.jpg', '/12.jpg', '/13.jpg', '/14.jpg'] 
+    },
+    { 
+      name: 'Michael Kors: Gold-Tone Chronograph', 
+      images: ['/11.jpg'] 
+    },
+    { 
+      name: 'Swatch: Steel & Blue Chronograph', 
+      images: ['/10.jpg'] 
+    },
+  ],
+  'Premium Eyewear': [
+    { 
+      name: 'Ray-Ban: The Aviator Classic', 
+      images: ['/2.jpg', '/5.jpg'] 
+    },
+    { 
+      name: 'Gucci: Signature Acetate Frames', 
+      images: ['/3.jpg', '/6.jpg'] 
+    },
+    { 
+      name: 'Carrera: Bold & Sport-Luxury Styles', 
+      images: ['/1.jpg', '/4.jpg', '/7.jpg'] 
+    },
+  ],
   'Executive Desk': [
-    { name: 'Premium Wooden Desk Organizers', image: 'https://i.pinimg.com/1200x/c0/d9/7a/c0d97a46b2e2f2c76939e840752656e4.jpg' },
-    { name: 'Personalized Executive Name Lamps', image: 'https://i.pinimg.com/1200x/e9/41/a7/e941a78a18baad0b3f975a9414e8b783.jpg' },
-    { name: 'Luxury LED Desk Clocks', image: 'https://i.pinimg.com/736x/6c/02/28/6c0228b14206d2c6f04c43305d60e2f1.jpg' },
-    { name: 'Premium Table Décor Accessories', image: 'https://i.pinimg.com/1200x/a9/0f/c5/a90fc571f4a705ac34b82b3b0d91274c.jpg' },
-    { name: 'Premium Leatherette Organizer', image: 'https://i.pinimg.com/1200x/37/0c/88/370c881efd5094e97e69b80ba5a92bb8.jpg' },
-    { name: 'Executive Notebook & Pen Set', image: 'https://i.pinimg.com/1200x/0a/25/41/0a2541d1cd4de5362a4816cf7ecd88f1.jpg' },
-    { name: 'Smart Desk Lamp', image: 'https://i.pinimg.com/736x/00/5c/42/005c4240fb4fecc8440b2973c27c6677.jpg' },
+    { name: 'Premium Wooden Desk Organizers', images: ['https://i.pinimg.com/1200x/c0/d9/7a/c0d97a46b2e2f2c76939e840752656e4.jpg'] },
+    { name: 'Personalized Executive Name Lamps', images: ['https://i.pinimg.com/1200x/e9/41/a7/e941a78a18baad0b3f975a9414e8b783.jpg'] },
+    { name: 'Luxury LED Desk Clocks', images: ['https://i.pinimg.com/736x/6c/02/28/6c0228b14206d2c6f04c43305d60e2f1.jpg'] },
+    { name: 'Premium Table Décor Accessories', images: ['https://i.pinimg.com/1200x/a9/0f/c5/a90fc571f4a705ac34b82b3b0d91274c.jpg'] },
+    { name: 'Premium Leatherette Organizer', images: ['https://i.pinimg.com/1200x/37/0c/88/370c881efd5094e97e69b80ba5a92bb8.jpg'] },
+    { name: 'Executive Notebook & Pen Set', images: ['https://i.pinimg.com/1200x/0a/25/41/0a2541d1cd4de5362a4816cf7ecd88f1.jpg'] },
+    { name: 'Smart Desk Lamp', images: ['https://i.pinimg.com/736x/00/5c/42/005c4240fb4fecc8440b2973c27c6677.jpg'] },
   ],
   'Technology': [
-    { name: 'Premium Metal USB Drives', image: 'https://i.pinimg.com/736x/8b/7e/2d/8b7e2d2b2dd170ef334bbfc4bef0eb5b.jpg' },
-    { name: 'Wireless Charging Stations', image: 'https://i.pinimg.com/736x/7e/b9/fe/7eb9fe3f0f4ba362cf381acd15694288.jpg' },
-    { name: 'Executive Power Banks', image: 'https://i.pinimg.com/736x/f4/53/fa/f453fa6579dcb16fe49df35f5dc84f48.jpg' },
-    { name: 'Wireless Charging Dock', image: 'https://i.pinimg.com/736x/95/a5/7e/95a57ee05c39ba2ceec4ba1857093cfd.jpg' },
-    { name: 'Bluetooth Speakers', image: 'https://i.pinimg.com/736x/1f/44/f0/1f44f0385ebb66764e22a868467dc09d.jpg' },
+    { name: 'Premium Metal USB Drives', images: ['https://i.pinimg.com/736x/8b/7e/2d/8b7e2d2b2dd170ef334bbfc4bef0eb5b.jpg'] },
+    { name: 'Wireless Charging Stations', images: ['https://i.pinimg.com/736x/7e/b9/fe/7eb9fe3f0f4ba362cf381acd15694288.jpg'] },
+    { name: 'Executive Power Banks', images: ['https://i.pinimg.com/736x/f4/53/fa/f453fa6579dcb16fe49df35f5dc84f48.jpg'] },
+    { name: 'Wireless Charging Dock', images: ['https://i.pinimg.com/736x/95/a5/7e/95a57ee05c39ba2ceec4ba1857093cfd.jpg'] },
+    { name: 'Bluetooth Speakers', images: ['https://i.pinimg.com/736x/1f/44/f0/1f44f0385ebb66764e22a868467dc09d.jpg'] },
   ],
   'Sustainable Luxury': [
-    { name: 'Bamboo Bottle Gift Sets', image: 'https://i.pinimg.com/736x/c3/f8/b8/c3f8b8637c15b66f052c80a25b6f2541.jpg' },
-    { name: 'Eco-Friendly Executive Kits', image: 'https://i.pinimg.com/236x/d0/35/cc/d035cc4cfe2eb85dae597161c373f938.jpg' },
-    { name: 'Premium Wooden Gift Sets', image: 'https://i.pinimg.com/1200x/9c/64/29/9c6429d25b3ca765e1492fcc0f9e74a6.jpg' },
-    { name: 'Sustainable Corporate Gift Boxes', image: 'https://i.pinimg.com/1200x/98/6d/9c/986d9cf55035a660581a30a138b86862.jpg' },
+    { name: 'Bamboo Bottle Gift Sets', images: ['https://i.pinimg.com/736x/c3/f8/b8/c3f8b8637c15b66f052c80a25b6f2541.jpg'] },
+    { name: 'Eco-Friendly Executive Kits', images: ['https://i.pinimg.com/236x/d0/35/cc/d035cc4cfe2eb85dae597161c373f938.jpg'] },
+    { name: 'Premium Wooden Gift Sets', images: ['https://i.pinimg.com/1200x/9c/64/29/9c6429d25b3ca765e1492fcc0f9e74a6.jpg'] },
+    { name: 'Sustainable Corporate Gift Boxes', images: ['https://i.pinimg.com/1200x/98/6d/9c/986d9cf55035a660581a30a138b86862.jpg'] },
   ],
   'Curated Hampers': [
-    { name: 'Executive Workstation Hamper', image: 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=500&q=80' },
-    { name: 'Leadership Appreciation Hamper', image: 'https://images.unsplash.com/photo-1513885535751-8b9238bd345a?w=500&q=80' },
-    { name: 'Festive Luxury Collection', image: 'https://images.unsplash.com/photo-1513885535751-8b9238bd345a?w=500&q=80' },
-    { name: 'Premium Wellness Hamper', image: 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=500&q=80' },
+    { name: 'Executive Workstation Hamper', images: ['https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=500&q=80'] },
+    { name: 'Leadership Appreciation Hamper', images: ['https://images.unsplash.com/photo-1513885535751-8b9238bd345a?w=500&q=80'] },
+    { name: 'Festive Luxury Collection', images: ['https://images.unsplash.com/photo-1513885535751-8b9238bd345a?w=500&q=80'] },
+    { name: 'Premium Wellness Hamper', images: ['https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=500&q=80'] },
   ]
 };
 
 export default function PremiumCollection() {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [selectedSubCategory, setSelectedSubCategory] = useState<typeof premiumCards[0] | null>(null);
+  const [activeImage, setActiveImage] = useState<Record<string, string>>({});
   const { cart, addToCart, removeFromCart } = useCart();
 
   useEffect(() => {
@@ -51,6 +87,15 @@ export default function PremiumCollection() {
     window.addEventListener('close-modals', handleClose);
     return () => window.removeEventListener('close-modals', handleClose);
   }, []);
+
+  useEffect(() => {
+    // Reset active images when modal opens
+    if (selectedSubCategory) {
+      const initialActiveImages: Record<string, string> = {};
+      premiumProducts[selectedSubCategory.title]?.forEach(p => { initialActiveImages[p.name] = p.images[0]; });
+      setActiveImage(initialActiveImages);
+    }
+  }, [selectedSubCategory]);
 
   const handleMouseMove = (e: React.MouseEvent) => {
     const x = (e.clientX / window.innerWidth - 0.5) * 30;
@@ -131,12 +176,12 @@ export default function PremiumCollection() {
             Premium Corporate Gifting
           </h2>
           <p className="text-[#3F3F3F] text-[16px] lg:text-[18px] leading-[1.8] max-w-[700px]">
-            Designed for leadership teams, key clients, and executive appreciation programs. Every gift speaks of unparalleled quality and profound thoughtfulness.
+            Designed for leadership teams, key clien and executive appreciation programs. Every gift speaks of unparalleled quality and profound thoughtfulness.
           </p>
         </div>
 
         {/* Product Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 w-full mb-24">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full mb-24">
           {premiumCards.map((card, i) => {
             const Icon = card.icon;
             return (
@@ -184,23 +229,36 @@ export default function PremiumCollection() {
               </div>
               <button 
                 onClick={() => setSelectedSubCategory(null)} 
-                className="p-2.5 rounded-full bg-slate-50 hover:bg-slate-100 text-slate-500 hover:text-slate-900 transition-colors"
+                className="p-2.5 rounded-full bg-slate-50 hover:bg-slate-100 text-slate-500 hover:text-slate-900 transition-colors z-10"
               >
                 <X className="w-6 h-6" />
               </button>
             </div>
             <div className="p-6 md:p-8 overflow-y-auto custom-scrollbar bg-slate-50 flex-1">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 {premiumProducts[selectedSubCategory.title]?.map((p) => {
                   const isAdded = cart.some(item => item.name === p.name);
                   return (
                     <div key={p.name} className="bg-white rounded-[20px] p-4 shadow-sm border border-gray-100 hover:shadow-md transition-shadow group flex flex-col">
-                      <div className="w-full h-48 rounded-2xl overflow-hidden mb-4 relative bg-slate-100">
-                        <img src={p.image} alt={p.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                      <div className="w-full h-56 rounded-2xl overflow-hidden mb-4 relative bg-slate-100">
+                        <img src={activeImage[p.name] || p.images[0]} alt={p.name} className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500" />
                       </div>
+                      {p.images.length > 1 && (
+                        <div className="flex gap-2 mb-4">
+                          {p.images.map(img => (
+                            <button 
+                              key={img} 
+                              onClick={() => setActiveImage(prev => ({ ...prev, [p.name]: img }))}
+                              className={`w-12 h-12 rounded-lg overflow-hidden border-2 transition-colors ${activeImage[p.name] === img ? 'border-orange-500' : 'border-gray-200 hover:border-gray-400'}`}
+                            >
+                              <img src={img} alt="" className="w-full h-full object-contain" />
+                            </button>
+                          ))}
+                        </div>
+                      )}
                       <h4 className="font-manrope font-bold text-slate-800 text-sm mb-4 flex-1">{p.name}</h4>
                       <button 
-                        onClick={() => isAdded ? removeFromCart(p.name) : addToCart({ name: p.name, image: p.image, tag: selectedSubCategory.title })}
+                        onClick={() => isAdded ? removeFromCart(p.name) : addToCart({ name: p.name, image: p.images[0], tag: selectedSubCategory.title })}
                         className={`w-full py-2.5 rounded-xl text-xs font-bold uppercase tracking-wide transition-colors flex items-center justify-center gap-2 ${
                           isAdded ? 'bg-[#D97706] text-white hover:bg-[#B45309]' : 'bg-[#7C2D12] text-white hover:bg-[#431407]'
                         }`}

@@ -128,7 +128,7 @@ export default function RegularCollection() {
             Volume Corporate Gifting
           </h2>
           <p className="text-[#3F3F3F] text-[16px] lg:text-[18px] leading-[1.8] max-w-[700px]">
-            Reliable, high-quality gifting solutions engineered perfectly for conferences, massive employee engagement programs, and wide-scale campaigns.
+            Reliable, high-quality gifting solutions engineered perfectly for conferences, massive employee engagement programs and wide-scale campaigns.
           </p>
         </div>
 

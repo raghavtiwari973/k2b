@@ -188,6 +188,9 @@ export default function CTA() {
 
           </div>
         </div>
+        <footer className="text-center py-8">
+          <p className="text-slate-500 text-sm font-dm">Copyright © 2025 K2b - All Rights Reserved.</p>
+        </footer>
       </div>
     </section>
     </>

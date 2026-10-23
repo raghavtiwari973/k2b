@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Briefcase, Monitor, Package, PenTool, Layout, Layers, X, ShoppingCart } from 'lucide-react';
+import { Briefcase, Monitor, Package, PenTool, Layout, Layers, X, ShoppingCart, Smartphone } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useCart } from './CartContext';
 
@@ -8,6 +8,8 @@ const standardCards = [
   { title: 'Technology Essentials', desc: 'Branded USB drives and digital clocks', icon: Monitor },
   { title: 'Corporate Desk Kits', desc: 'Complete matching sets for employees', icon: Package },
   { title: 'Personalized Items', desc: 'Custom tailored professional accessories', icon: PenTool },
+  { title: 'Office Essentials', desc: 'Branded pens and corporate diaries', icon: PenTool },
+  { title: 'Desk Utilities', desc: 'Mouse pads and mobile holders', icon: Smartphone },
 ];
 
 const standardProducts: Record<string, {name: string, image: string}[]> = {
@@ -36,6 +38,19 @@ const standardProducts: Record<string, {name: string, image: string}[]> = {
     { name: 'Daily Utility Gift Boxes', image: 'https://images.unsplash.com/photo-1513885535751-8b9238bd345a?w=500&q=80' },
     { name: 'Premium Coffee Mugs', image: 'https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?w=500&q=80' },
     { name: 'Eco Stationery Kits', image: 'https://images.unsplash.com/photo-1585776245991-cf89dd7fc73a?w=500&q=80' },
+  ],
+  'Office Essentials': [
+    { name: 'Branded Pen Sets', image: 'https://images.unsplash.com/photo-1585336261022-680e295ce3fe?w=500&q=80' },
+    { name: 'Notebooks', image: 'https://i.pinimg.com/736x/c9/d0/f0/c9d0f03c10197ba89ae6da57e03004d7.jpg' },
+    { name: 'Diaries', image: 'https://i.pinimg.com/736x/83/f2/9f/83f29f0ba1c3955bfdbb4c2e6c1b5509.jpg' },
+    { name: 'Desk Calendars', image: 'https://i.pinimg.com/736x/7b/bb/ae/7bbbae50aa88c1864193a4cdd7226d84.jpg' },
+    { name: 'Sticky Notes', image: 'https://i.pinimg.com/736x/6e/c7/1b/6ec71b543f7fa90c408aecb5889a42e9.jpg' },
+  ],
+  'Desk Utilities': [
+    { name: 'Mouse Pads', image: 'https://i.pinimg.com/736x/2b/dc/13/2bdc1376749b4e23a6eaf707a3375261.jpg' },
+    { name: 'Mobile Holders', image: 'https://i.pinimg.com/736x/6a/48/cc/6a48cc09e3eceac5cfd5af77bdfbf5db.jpg' },
+    { name: 'USB Drives', image: 'https://i.pinimg.com/736x/b1/7f/b2/b17fb2d41351f6f4d02d3b7296d49b6c.jpg' },
+    { name: 'Desk Utilities', image: 'https://i.pinimg.com/736x/43/ba/bd/43babd24b1371756bac0f02515b8876f.jpg' },
   ]
 };
 
@@ -134,7 +149,7 @@ export default function StandardCollection() {
         </div>
 
         {/* Product Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 w-full mb-24">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full mb-24">
           {standardCards.map((card, i) => {
             const Icon = card.icon;
             return (
@@ -188,7 +203,7 @@ export default function StandardCollection() {
               </button>
             </div>
             <div className="p-6 md:p-8 overflow-y-auto custom-scrollbar bg-slate-50 flex-1">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
                 {standardProducts[selectedSubCategory.title]?.map((p) => {
                   const isAdded = cart.some(item => item.name === p.name);
                   return (
@@ -208,6 +223,31 @@ export default function StandardCollection() {
                     </div>
                   );
                 })}
+
+                {/* For More Options WhatsApp Card inside Popup */}
+                <div className="bg-gradient-to-br from-[#0F172A] to-[#020617] text-white rounded-[20px] p-5 shadow-sm border border-slate-800 flex flex-col justify-between items-center text-center group hover:shadow-lg transition-all min-h-[280px]">
+                  <div className="w-14 h-14 rounded-full bg-white/10 flex items-center justify-center my-auto border border-white/20 group-hover:scale-110 transition-transform">
+                    <span className="w-9 h-9 rounded-full bg-[#25D366] flex items-center justify-center text-white shadow-md">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
+                      </svg>
+                    </span>
+                  </div>
+                  <div className="mb-4">
+                    <h4 className="font-sora font-bold text-white text-base mb-1.5">Need More Options?</h4>
+                    <p className="font-dm text-xs text-slate-300 leading-relaxed">
+                      Discover additional corporate utility items and custom bulk packages.
+                    </p>
+                  </div>
+                  <a
+                    href={`https://wa.me/918959817421?text=Hello%2C%20I%20want%20to%20explore%20more%20options%20for%20Standard%20-%20${encodeURIComponent(selectedSubCategory.title)}.`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full py-2.5 rounded-xl bg-[#25D366] hover:bg-[#20ba5a] text-white text-xs font-manrope font-bold uppercase tracking-wide flex items-center justify-center gap-2 shadow-md transition-transform hover:scale-105"
+                  >
+                    <span>More Options on WhatsApp</span>
+                  </a>
+                </div>
               </div>
             </div>
           </div>

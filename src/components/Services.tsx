@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Gift, Briefcase, ShoppingBag, CheckCircle2, Leaf, X, ArrowRight } from 'lucide-react';
+import { Gift, Briefcase, CheckCircle2, Leaf, X } from 'lucide-react';
 import PremiumCollection from './PremiumCollection';
 import StandardCollection from './StandardCollection';
-import RegularCollection from './RegularCollection';
 import SustainableCollection from './SustainableCollection';
 
 
@@ -16,8 +15,8 @@ const categories = [
     features: [
       'Executive Desk Collection',
       'Technology Collection',
-      'Sustainable Luxury Collection',
-      'Premium Gift Hampers',
+      'Joining Kits & Hampers',
+      'Event Giveaways',
     ],
     accent: '#F97316',
     bg: 'from-orange-50 to-amber-50',
@@ -31,32 +30,15 @@ const categories = [
     description:
       'Elegant gifting solutions for managers, associates, partners and event participants.',
     features: [
-      'Workspace Essentials',
+      'Workspace & Office Essentials',
       'Technology Essentials',
-      'Utility Gift Sets',
-      'Eco-Friendly Collection',
+      'Corporate Desk Kits',
+      'Desk Utilities',
     ],
     accent: '#0F172A',
     bg: 'from-slate-50 to-gray-50',
     iconBg: 'from-slate-700 to-slate-800',
     badge: 'Best Value',
-  },
-  {
-    icon: ShoppingBag,
-    title: 'Regular',
-    subtitle: '',
-    description:
-      'Smart gifting solutions designed for employee engagement and bulk corporate requirements.',
-    features: [
-      'Office Essentials',
-      'Event Giveaways',
-      'Joining Kits',
-      'Promotional Merchandise',
-    ],
-    accent: '#10B981',
-    bg: 'from-emerald-50 to-teal-50',
-    iconBg: 'from-emerald-500 to-emerald-600',
-    badge: 'Budget Friendly',
   },
   {
     icon: Leaf,
@@ -213,7 +195,7 @@ export default function Services() {
         </div>
 
         {/* Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {categories.map((cat) => (
             <CategoryCard 
               key={cat.title} 
@@ -251,7 +233,6 @@ export default function Services() {
               <div className="overflow-y-auto custom-scrollbar w-full h-full">
                 {selectedCategory.title === 'Premium' && <PremiumCollection />}
                 {selectedCategory.title === 'Standard' && <StandardCollection />}
-                {selectedCategory.title === 'Regular' && <RegularCollection />}
                 {selectedCategory.title === 'Sustainable' && <SustainableCollection />}
               </div>
             </div>

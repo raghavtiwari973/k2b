@@ -1,5 +1,84 @@
 import { useState, useRef, useEffect } from 'react';
-import { Package, Palette, Truck, Building2, Gift, Sparkles } from 'lucide-react';
+import { Package, Palette, Truck, Gift, Sparkles } from 'lucide-react';
+
+const festiveBanners = [
+  {
+    image: 'https://user47455.na.imgto.link/public/20261023/f722e7bdbba8a38f324ca708-premium-diwali-corporate-gifting-solutions.avif',
+    tag: 'Limited Time Festive Special',
+    subtag: 'Diwali & New Year Catalogs Open',
+    title: 'Exclusive Festive & Celebration Hampers',
+    description: 'Customized luxury gourmet boxes, artisanal brassware, bespoke executive sets, and branded festive packaging delivered seamlessly across India.',
+  },
+  {
+    image: 'https://user47455.na.imgto.link/public/20261023/72137da840b59855f7b7d4d7-luxury-diwali-corporate-gifting-showcase.avif',
+    tag: 'Signature Diwali Showcase',
+    subtag: 'Curated for Leadership & VIPs',
+    title: 'Luxury Diwali Corporate Gifting Collection',
+    description: 'Elevate your festive relationships with handcrafted gift hampers, exquisite dry-fruit assortments, and premium customized gift sets.',
+  },
+  {
+    image: 'https://user47455.na.imgto.link/public/20261023/bb64eaa50e8fc28addae0868-premium-diwali-corporate-gift-hamper.avif',
+    tag: 'Executive Festive Edition',
+    subtag: 'Bespoke Custom Packaging Available',
+    title: 'Premium Diwali Corporate Gift Hampers',
+    description: 'Thoughtfully curated luxury hampers featuring gourmet treats, festive keepsakes, and personalized corporate branding for your esteemed clients.',
+  },
+];
+
+function FestiveBannerSlider() {
+  const [current, setCurrent] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % festiveBanners.length);
+    }, 5500);
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <div className="relative w-full overflow-hidden rounded-[36px] bg-slate-900 shadow-2xl">
+      {/* Horizontal Sliding Track (Right to Left Slide) */}
+      <div
+        className="flex w-full transition-transform duration-700 ease-out"
+        style={{ transform: `translateX(-${current * 100}%)` }}
+      >
+        {festiveBanners.map((banner, idx) => (
+          <div key={idx} className="w-full flex-shrink-0">
+            <a
+              href="https://wa.me/918959817421?text=Hello%2C%20I%20would%20like%20to%20explore%20your%20Festive%20Diwali%20%26%20Corporate%20Gifting%20Hampers."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block relative w-full overflow-hidden cursor-pointer"
+              title="Click to inquire on WhatsApp"
+            >
+              <img
+                src={banner.image}
+                alt={banner.title}
+                className="w-full h-auto block object-contain select-none"
+              />
+            </a>
+          </div>
+        ))}
+      </div>
+
+      {/* Subtle Centered Dots Indicator */}
+      <div className="absolute bottom-3 sm:bottom-4 inset-x-0 z-30 flex items-center justify-center pointer-events-auto">
+        <div className="flex items-center gap-2 bg-black/40 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/15">
+          {festiveBanners.map((_, idx) => (
+            <button
+              key={idx}
+              onClick={() => setCurrent(idx)}
+              aria-label={`Go to banner ${idx + 1}`}
+              className={`h-2 rounded-full transition-all duration-300 ${
+                idx === current ? 'w-6 bg-[#FF7A00]' : 'w-2 bg-white/40 hover:bg-white/80'
+              }`}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 function AnimatedCounter({ end, duration = 2000 }: { end: number, duration?: number }) {
   const [count, setCount] = useState(0);
@@ -229,19 +308,9 @@ export default function WhyK2B() {
             </div>
           </BentoCard>
 
-          {/* Block 4: Corporate Expertise (Spans Full Width on lg, 3 on md) */}
-          <BentoCard containerClassName="md:col-span-3 lg:col-span-4" className="bg-white/50 backdrop-blur-2xl border border-white/60 rounded-[40px] p-10 lg:p-14 shadow-xl hover:shadow-2xl hover:border-blue-200 transition-colors">
-            <div className="h-full w-full flex flex-col lg:flex-row items-center justify-between gap-8 pointer-events-none">
-            <div className="flex-1">
-              <Building2 className="w-12 h-12 text-[#3B82F6] mb-6 group-hover:scale-110 transition-transform" />
-              <h3 className="font-sora font-bold text-3xl text-[#0B1324] mb-3">Enterprise Grade Expertise</h3>
-              <p className="font-dm text-[#5E6B84] text-lg max-w-2xl leading-relaxed">Years of experience crafting gifting strategies specifically for organizations — from rapidly growing startups to Fortune 500 enterprises.</p>
-            </div>
-            <div className="flex-shrink-0 text-center lg:text-right">
-               <p className="font-sora font-black text-[80px] leading-none text-[#0B1324]"><AnimatedCounter end={200} /><span className="text-[#3B82F6]">+</span></p>
-               <p className="font-manrope font-bold text-sm uppercase tracking-widest text-[#5E6B84] mt-2">Active Corporate Clients</p>
-            </div>
-            </div>
+          {/* Block 4: Festive Offers Full Banner Slider */}
+          <BentoCard containerClassName="md:col-span-3 lg:col-span-4" className="relative rounded-[36px] overflow-hidden shadow-2xl border border-amber-200/50 group">
+            <FestiveBannerSlider />
           </BentoCard>
 
         </div>

@@ -3,7 +3,6 @@ import Hero from './components/Hero';
 import Services from './components/Services';
 import Customization from './components/Customization';
 import WhyK2B from './components/WhyK2B';
-import Testimonials from './components/Testimonials';
 import CTA from './components/CTA';
 import { CartProvider } from './components/CartContext';
 import FloatingQuoteButton from './components/FloatingQuoteButton';
@@ -19,11 +18,10 @@ export default function App() {
           <Services />
           <Customization />
           <WhyK2B />
-          <Testimonials />
           <CTA />
         </main>
         <Chatbot />
-            <FloatingQuoteButton />
+        <FloatingQuoteButton />
       </div>
     </CartProvider>
   );

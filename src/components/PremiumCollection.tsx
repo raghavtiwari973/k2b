@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Crown, Briefcase, Headphones, Leaf, Gift, Sparkles, Star, X, ShoppingCart } from 'lucide-react';
+import { Crown, Briefcase, Headphones, Leaf, Gift, Sparkles, Star, X, ShoppingCart, Tag } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useCart } from './CartContext';
 
@@ -10,6 +10,8 @@ const premiumCards = [
   { title: 'Technology', desc: 'Cutting-edge tech gifts for modern executives', icon: Headphones },
   { title: 'Sustainable Luxury', desc: 'Eco-conscious premium gifting solutions', icon: Leaf },
   { title: 'Curated Hampers', desc: 'Bespoke hampers crafted with finest products', icon: Gift },
+  { title: 'Joining Kits', desc: 'Welcome kits for new employees and leaders', icon: Gift },
+  { title: 'Event Giveaways', desc: 'Promo merchandise for mass distribution and events', icon: Tag },
 ];
 
 type Product = {
@@ -73,6 +75,18 @@ const premiumProducts: Record<string, Product[]> = {
     { name: 'Leadership Appreciation Hamper', images: ['https://images.unsplash.com/photo-1513885535751-8b9238bd345a?w=500&q=80'] },
     { name: 'Festive Luxury Collection', images: ['https://images.unsplash.com/photo-1513885535751-8b9238bd345a?w=500&q=80'] },
     { name: 'Premium Wellness Hamper', images: ['https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=500&q=80'] },
+  ],
+  'Joining Kits': [
+    { name: 'Employee Welcome Kits', images: ['https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=500&q=80'] },
+    { name: 'Employee Joining Kits', images: ['https://images.unsplash.com/photo-1513885535751-8b9238bd345a?w=500&q=80'] },
+    { name: 'Coffee Mugs', images: ['https://i.pinimg.com/736x/78/fc/6c/78fc6cc72efbcec6fd4471a2f5adc5af.jpg'] },
+    { name: 'Keychains', images: ['https://i.pinimg.com/1200x/bf/36/12/bf36129637a8bdefb955407b4ea0680a.jpg'] },
+  ],
+  'Event Giveaways': [
+    { name: 'Conference Kits', images: ['https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500&q=80'] },
+    { name: 'Promotional Merchandise', images: ['https://i.pinimg.com/736x/78/87/f5/7887f5d56647313252ccb7565378c405.jpg'] },
+    { name: 'Training Program Gifts', images: ['https://images.unsplash.com/photo-1585776245991-cf89dd7fc73a?w=500&q=80'] },
+    { name: 'Lanyards', images: ['https://i.pinimg.com/1200x/0f/2c/4b/0f2c4bb8097cb247b5e9392b31983c55.jpg'] },
   ]
 };
 
@@ -268,6 +282,31 @@ export default function PremiumCollection() {
                     </div>
                   );
                 })}
+
+                {/* For More Options WhatsApp Card inside Popup */}
+                <div className="bg-gradient-to-br from-[#7C2D12] to-[#431407] text-white rounded-[20px] p-5 shadow-sm border border-orange-900/30 flex flex-col justify-between items-center text-center group hover:shadow-lg transition-all min-h-[280px]">
+                  <div className="w-14 h-14 rounded-full bg-white/10 flex items-center justify-center my-auto border border-white/20 group-hover:scale-110 transition-transform">
+                    <span className="w-9 h-9 rounded-full bg-[#25D366] flex items-center justify-center text-white shadow-md">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
+                      </svg>
+                    </span>
+                  </div>
+                  <div className="mb-4">
+                    <h4 className="font-sora font-bold text-white text-base mb-1.5">Looking for More?</h4>
+                    <p className="font-dm text-xs text-orange-200/80 leading-relaxed">
+                      Explore our complete executive catalog with bespoke custom branding options.
+                    </p>
+                  </div>
+                  <a
+                    href={`https://wa.me/918959817421?text=Hello%2C%20I%20want%20to%20explore%20more%20options%20for%20Premium%20-%20${encodeURIComponent(selectedSubCategory.title)}.`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full py-2.5 rounded-xl bg-[#25D366] hover:bg-[#20ba5a] text-white text-xs font-manrope font-bold uppercase tracking-wide flex items-center justify-center gap-2 shadow-md transition-transform hover:scale-105"
+                  >
+                    <span>More Options on WhatsApp</span>
+                  </a>
+                </div>
               </div>
             </div>
           </div>

@@ -29,6 +29,11 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-18 py-4">
           {/* Logo */}
           <a href="#home" className="flex items-center gap-3 group">
+            <img
+              src="https://user47455.na.imgto.link/public/20261023/4777ff87cbcbee8365b6327e-logo-1.avif"
+              alt="Key2Brand Logo"
+              className="w-10 h-10 object-contain rounded-full group-hover:scale-105 transition-transform"
+            />
             <div className="flex flex-col leading-none">
               <span className="font-sora font-800 text-base font-extrabold text-slate-900 tracking-tight">Key2Brand</span>
               <span className="font-dm text-xs text-orange-500 font-semibold tracking-wide">360° SOLUTION</span>

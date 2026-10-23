@@ -111,7 +111,7 @@ export default function Hero() {
                     <div className="absolute bottom-0 left-0 w-40 h-40 bg-violet-100 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
                     
                     <img
-                      src="/logo.png"
+                      src="https://user47455.na.imgto.link/public/20261023/4777ff87cbcbee8365b6327e-logo-1.avif"
                       alt="K2B Logo"
                       className="relative z-20 w-full h-full object-contain filter drop-shadow-2xl rounded-full"
                     />
